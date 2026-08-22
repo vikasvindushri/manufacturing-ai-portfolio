@@ -1,0 +1,15 @@
+{
+  "incident_id": "Q-2026-014",
+  "date": "2026-08-18",
+  "plant": "Demo Plant",
+  "line": "Final Assembly 2",
+  "part_number": "PN-AX14",
+  "process": "DC tool fastening",
+  "defect": "Under-torque detected at audit",
+  "quantity_affected": 18,
+  "symptoms": "Torque trace below lower limit after tool calibration expired",
+  "detection": "End-of-line layered process audit",
+  "immediate_action": "Stopped station; quarantined WIP; verified tool calibration",
+  "owner": "Quality Engineer",
+  "severity": "high"
+}

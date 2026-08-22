@@ -1,0 +1,12 @@
+services:
+  quality-app:
+    build: .
+    ports: ["8501:8501"]
+  rag-app:
+    build: .
+    command: streamlit run project_2_rag/app.py --server.address=0.0.0.0
+    ports: ["8502:8501"]
+  agent-app:
+    build: .
+    command: streamlit run project_3_low_code_agent/app.py --server.address=0.0.0.0
+    ports: ["8503:8501"]

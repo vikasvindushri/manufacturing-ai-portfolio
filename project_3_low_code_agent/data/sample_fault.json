@@ -1,0 +1,9 @@
+{
+  "fault_id": "F-1007",
+  "asset": "Press-07",
+  "area": "Stamping",
+  "description": "Hydraulic pressure fluctuates and cycle time is high",
+  "reported_by": "Operator A",
+  "shift": "2",
+  "timestamp": "2026-08-20T14:20:00Z"
+}

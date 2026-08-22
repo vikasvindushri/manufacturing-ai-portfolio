@@ -1,0 +1,29 @@
+{
+  "type": "object",
+  "required": [
+    "fault_id",
+    "asset",
+    "description"
+  ],
+  "properties": {
+    "fault_id": {
+      "type": "string"
+    },
+    "asset": {
+      "type": "string"
+    },
+    "area": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "reported_by": {
+      "type": "string"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+# AI Use-Case Canvas
+- User and decision:
+- Current process and pain:
+- Data and ownership:
+- AI-assisted task:
+- Human approval:
+- KPI and baseline:
+- Failure modes:
+- Integration:
+- Adoption plan:
+- Stop-use criteria:
