@@ -71,6 +71,14 @@ The suite contains three end-to-end applications:
 
 **Expected value:** More consistent escalation, clearer ownership, and structured data for future CMMS, QMS, or MES integration.
 
+## Delivery status
+
+- **Phase 1 — Product foundation:** ✅ Complete
+- **Phase 2 — Guided workflow configuration:** Planned
+- **Phase 3 — Data and connector studio:** Planned
+
+Phase 1 evidence and verification are documented in [`docs/PHASE_1_COMPLETION.md`](docs/PHASE_1_COMPLETION.md).
+
 ## Architecture
 
 ```mermaid

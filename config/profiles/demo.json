@@ -1,0 +1,9 @@
+{
+  "profile": "demo",
+  "gemini_enabled": false,
+  "gemini_model": "gemini-3.6-flash",
+  "telemetry_enabled": false,
+  "audit_log_path": "runtime/audit_events.jsonl",
+  "history_limit": 10,
+  "allow_advanced_json": false
+}
