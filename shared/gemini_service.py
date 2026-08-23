@@ -4,7 +4,7 @@ from pydantic import BaseModel
 class GeminiUnavailable(RuntimeError): pass
 
 def enabled(): return os.getenv("ENABLE_GEMINI","false").lower()=="true" and bool(os.getenv("GEMINI_API_KEY"))
-def model_name(): return os.getenv("GEMINI_MODEL","gemini-2.5-flash")
+def model_name(): return os.getenv("GEMINI_MODEL","gemini-3.6-flash")
 def generate_structured(system_prompt:str,user_prompt:str,schema:Type[BaseModel]):
     if not enabled(): raise GeminiUnavailable("Gemini is disabled or GEMINI_API_KEY is missing.")
     from google import genai

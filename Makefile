@@ -1,14 +1,20 @@
 install:
-	pip install -r requirements.txt
+	python -m pip install -r requirements.txt
 
 test:
-	pytest
+	python -m pytest
+
+check:
+	python scripts/check_environment.py
+
+portfolio:
+	python -m streamlit run app.py
 
 quality-app:
-	streamlit run project_1_quality_8d/app.py
+	python -m streamlit run project_1_quality_8d/app.py
 
 rag-app:
-	streamlit run project_2_rag/app.py
+	python -m streamlit run project_2_rag/app.py
 
 agent-app:
-	streamlit run project_3_low_code_agent/app.py
+	python -m streamlit run project_3_low_code_agent/app.py

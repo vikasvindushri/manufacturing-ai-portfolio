@@ -1,0 +1,15 @@
+{
+  "incident_id": "Q-2026-021",
+  "date": "2026-08-20",
+  "plant": "Demo Plant",
+  "line": "Machining Cell 4",
+  "part_number": "PN-BR22",
+  "process": "Bearing press",
+  "defect": "Bearing not fully seated",
+  "quantity_affected": 7,
+  "symptoms": "Axial dimension above specification after press operation",
+  "detection": "Final dimensional inspection",
+  "immediate_action": "Stopped cell and quarantined material since last accepted check",
+  "owner": "Quality Engineer",
+  "severity": "medium"
+}
