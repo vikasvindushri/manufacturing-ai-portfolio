@@ -73,7 +73,7 @@ The suite contains three end-to-end applications:
 
 ## Delivery status
 
-- **Phase 1 — Product foundation:** ✅ Complete in version 0.2
+- **Phase 1 — Product foundation:** ✅ Complete in version 0.3
 - **Phase 2 — Guided workflow configuration:** Planned
 - **Phase 3 — Data and connector studio:** Planned
 
