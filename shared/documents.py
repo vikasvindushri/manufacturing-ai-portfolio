@@ -71,7 +71,9 @@ def quality_markdown(r):
 - **Approver:** {_text(close.get('approver'))}
 - **Evidence required:** {_text(close.get('evidence_required',True))}
 
-## AI-assisted review
+## Result source and AI status
+
+{_text(r.get('provenance',{}).get('user_notice'), LOCAL_NOTICE if False else "Result generated locally. Gemini AI was not used.")}
 
 - **Gemini used:** {_text(r.get('provenance',{}).get('gemini_used',False))}
 - **Executive summary:** {_text(review.get('executive_summary'),'No additional AI review was used.')}
@@ -105,6 +107,10 @@ def knowledge_markdown(r):
 ## Result status
 
 {_text(r.get('status'))}
+
+## Result source and AI status
+
+{_text(r.get('provenance',{}).get('user_notice'),"Result generated locally. Gemini AI was not used.")}
 
 ## Supporting evidence
 
@@ -151,6 +157,10 @@ def fault_markdown(r):
 ## Recommended diagnostic checks
 
 {_lines(r.get('diagnostic_checks',[]))}
+
+## Result source and AI status
+
+{_text(r.get('provenance',{}).get('user_notice'),"Result generated locally. Gemini AI was not used.")}
 
 ## AI-assisted review
 

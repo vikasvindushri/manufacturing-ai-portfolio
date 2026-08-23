@@ -1,11 +1,13 @@
 # Phase 1 Completion Report — Product Foundation
 
 **Status:** COMPLETE  
-**Release:** 0.2  
+**Release:** 0.3  
 **Completion date:** 2026-08-23  
 **Goal:** Make the current suite reliable and easy to operate.
 
 ## Delivered capabilities
+
+- [x] **Runtime-resilient AI enrichment** — Local results remain available when Gemini is disabled or fails, and every outcome explicitly identifies whether Gemini was used.
 
 - [x] **Single navigation experience** — All three products and session history are available from one sidebar-driven Streamlit application.
 - [x] **Validated forms** — Quality and fault workflows use labeled fields, required-field checks, and numeric validation. Knowledge search validates question length. Raw JSON is no longer required for normal use.

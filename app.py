@@ -14,8 +14,9 @@ from project_1_quality_8d.engine import build_8d
 from project_2_rag.retriever import chunks_from_dir,LocalRetriever
 from project_3_low_code_agent.agent import triage
 from shared.documents import quality_markdown,knowledge_markdown,fault_markdown,markdown_to_html
+from services.workflows import run_quality,run_knowledge,run_fault
 ROOT=Path(__file__).resolve().parent
-APP_VERSION="0.2"
+APP_VERSION="0.3"
 st.set_page_config(page_title="Manufacturing AI Studio",page_icon="🏭",layout="wide",initial_sidebar_state="expanded")
 try: cfg=load_config()
 except ValueError as exc: st.error(str(exc));st.stop()
@@ -28,6 +29,17 @@ def errors(items):
     st.error("Please correct the following before continuing:")
     for x in items: st.write(f"- {x}")
     st.info("Your entries remain on screen. Correct the highlighted information and try again.")
+
+def show_ai_status(record):
+    provenance=record.get("provenance",{})
+    notice=provenance.get("user_notice","Result source information is unavailable.")
+    if provenance.get("gemini_used"):
+        st.success(notice)
+    elif provenance.get("gemini_status")=="failed":
+        st.warning(notice)
+        st.caption("You can continue reviewing, editing, and exporting the local result.")
+    else:
+        st.info(notice)
 
 def download_record(label,record,name,document_text=None,document_stem=None):
     st.download_button(label,json.dumps(record,indent=2),name,"application/json",use_container_width=True)
@@ -59,13 +71,13 @@ def quality_form():
         if err: errors(err);log("validation_failed","quality","error",{"count":len(err)})
         else:
             try:
-                result=build_8d(clean);result["provenance"]={"profile":cfg.profile,"local_engine":"rules-v2","gemini_used":False}
-                if cfg.gemini_enabled and enabled():
-                    result["gemini_review"]=generate_structured("You are a cautious manufacturing quality copilot. Separate facts from hypotheses.",json.dumps(result),GeminiQualityReview);result["provenance"].update({"gemini_used":True,"model":model_name()})
-                st.session_state["quality_result"]=result;add_history(st.session_state,"quality",result,cfg.history_limit);log("record_generated","quality",meta={"incident_id":clean["incident_id"]})
+                requested=cfg.gemini_enabled
+                result=run_quality(clean,cfg.profile,requested,generate_structured if enabled() else None,model_name())
+                st.session_state["quality_result"]=result;add_history(st.session_state,"quality",result,cfg.history_limit)
+                log("record_generated","quality",meta={"incident_id":clean["incident_id"],"gemini_status":result["provenance"]["gemini_status"]})
             except Exception as exc: st.error("The review could not be generated.");st.code(str(exc));st.info("Check configuration, then retry. Local mode remains available if Gemini is disabled.");log("generation_failed","quality","error",{"error_type":type(exc).__name__})
     if "quality_result" in st.session_state:
-        r=st.session_state["quality_result"];tabs=st.tabs(["Review and edit","Analysis","Approval and export"])
+        r=st.session_state["quality_result"];show_ai_status(r);tabs=st.tabs(["Review and edit","Analysis","Approval and export"])
         with tabs[0]:
             r["D2_problem"]=st.text_area("Problem statement",r["D2_problem"]);r["D3_containment"]=st.text_area("Containment actions (one per line)","\n".join(r["D3_containment"])).splitlines();st.caption("Edits are included in the exported record.")
         with tabs[1]: st.write("**Root-cause hypotheses**",r["D4_root_cause_hypotheses"]);st.write("**5-Why prompts**",r["D4_five_why_prompts"]);st.json(r.get("gemini_review",{"status":"Gemini not used"}))
@@ -92,16 +104,13 @@ def rag_app():
         if err:errors(err);log("validation_failed","knowledge","error")
         else:
             try:
-                hits=retriever.search(query,top_k=4)
-                if not hits:result={"question":query,"answer":"No supporting evidence was found in the current knowledge base.","matches":[],"status":"NO_EVIDENCE"}
-                else:
-                    evidence="\n\n".join(f"[{h['source']}#chunk-{h['chunk']}] {h['text']}" for h in hits)
-                    answer=generate_grounded_answer(query,evidence) if cfg.gemini_enabled and enabled() else "Evidence summary: "+" ".join(h["text"] for h in hits)
-                    result={"question":query,"answer":answer,"matches":hits,"status":"EVIDENCE_BACKED_DRAFT","provenance":{"profile":cfg.profile,"gemini_used":cfg.gemini_enabled and enabled()}}
-                st.session_state["rag_result"]=result;add_history(st.session_state,"knowledge",result,cfg.history_limit);log("search_completed","knowledge",meta={"match_count":len(result["matches"])})
+                requested=cfg.gemini_enabled
+                result=run_knowledge(query,retriever,cfg.profile,requested,generate_grounded_answer if enabled() else None)
+                st.session_state["rag_result"]=result;add_history(st.session_state,"knowledge",result,cfg.history_limit)
+                log("search_completed","knowledge",meta={"match_count":len(result["matches"]),"gemini_status":result["provenance"]["gemini_status"]})
             except Exception as exc:st.error("Search could not be completed.");st.code(str(exc));st.info("Verify the knowledge-base files and configuration, then retry.");log("search_failed","knowledge","error",{"error_type":type(exc).__name__})
     if "rag_result" in st.session_state:
-        r=st.session_state["rag_result"];st.subheader("Answer");st.write(r["answer"])
+        r=st.session_state["rag_result"];show_ai_status(r);st.subheader("Answer");st.write(r["answer"])
         for h in r["matches"]:
             with st.expander(f"{h['source']} · chunk {h['chunk']} · relevance {h['score']:.2f}"):st.write(h["text"])
         useful=st.radio("Was this result useful?",["Not rated","Yes","Partly","No"],horizontal=True,key="r_feedback")
@@ -130,12 +139,13 @@ def fault_form():
         if err:errors(err);log("validation_failed","fault","error",{"count":len(err)})
         else:
             try:
-                r=triage(clean);r["provenance"]={"profile":cfg.profile,"local_engine":"transparent-rules-v2","gemini_used":False}
-                if cfg.gemini_enabled and enabled():r["gemini_review"]=generate_structured("You are a safety-conscious manufacturing triage copilot. Never recommend bypassing safeguards.",json.dumps(r),GeminiTriageReview);r["provenance"].update({"gemini_used":True,"model":model_name()})
-                st.session_state["fault_result"]=r;add_history(st.session_state,"fault",r,cfg.history_limit);log("record_generated","fault",meta={"fault_id":clean["fault_id"]})
+                requested=cfg.gemini_enabled
+                r=run_fault(clean,cfg.profile,requested,generate_structured if enabled() else None,model_name())
+                st.session_state["fault_result"]=r;add_history(st.session_state,"fault",r,cfg.history_limit)
+                log("record_generated","fault",meta={"fault_id":clean["fault_id"],"gemini_status":r["provenance"]["gemini_status"]})
             except Exception as exc:st.error("The triage record could not be created.");st.code(str(exc));st.info("Check the form and configuration, then retry in local mode if necessary.");log("generation_failed","fault","error",{"error_type":type(exc).__name__})
     if "fault_result" in st.session_state:
-        r=st.session_state["fault_result"];tabs=st.tabs(["Review and edit","AI review","Decision and export"])
+        r=st.session_state["fault_result"];show_ai_status(r);tabs=st.tabs(["Review and edit","AI review","Decision and export"])
         with tabs[0]:
             r["likely_causes"]=st.text_area("Likely causes (one per line)","\n".join(r["likely_causes"])).splitlines();r["diagnostic_checks"]=st.text_area("Diagnostic checks (one per line)","\n".join(r["diagnostic_checks"])).splitlines()
         with tabs[1]:st.json(r.get("gemini_review",{"status":"Gemini not used"}))

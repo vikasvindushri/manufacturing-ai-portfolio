@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.3 — 2026-08-23
+
+### Fixed
+- Gemini runtime failures no longer discard successful local results.
+- Separate exception boundaries for local processing and optional AI enrichment.
+
+### Added
+- Explicit result-source notice in every workflow and readable report.
+- Gemini states: not requested, success, and failed.
+- Fallback provenance and non-blocking user warnings.
+- Automated outage tests across Quality, Knowledge, and Fault Triage.
+
 ## 0.2 — 2026-08-23
 
 ### Added
