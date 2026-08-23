@@ -23,11 +23,11 @@ with a:
 3. Use the **Fault Triage Agent** to process the hydraulic-pressure example.  
 4. In every product, point out evidence, provenance, fallback behavior and human approval.""")
 with b:
- st.info("Interview tip: lead with the manufacturing problem and measurable outcome—not the model name.")
+ st.info("Product demonstration tip: lead with the manufacturing problem and measurable outcome—not the model name.")
 governance_note()
 with st.sidebar:
  st.header("System status")
  st.success("Gemini connected by configuration") if enabled() else st.info("Local-first mode")
  st.write("Model",model_name());st.caption("Use scripts/check_environment.py for diagnostics.")
  st.divider();st.header("Portfolio navigation")
- st.markdown("- [User guide](./docs/USER_GUIDE.md)\n- [Interview playbook](./docs/INTERVIEW_DEMO_PLAYBOOK.md)\n- [Product requirements](./docs/PRODUCT_REQUIREMENTS.md)")
+ st.markdown("- [User guide](./docs/USER_GUIDE.md)\n- [Product demonstration playbook](./docs/PRODUCT_DEMONSTRATION.md)\n- [Product requirements](./docs/PRODUCT_REQUIREMENTS.md)")
