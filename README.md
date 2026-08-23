@@ -1,4 +1,4 @@
-# Manufacturing AI Studio
+# Manufacturing AI Studio — v0.2
 
 > A governed, local-first product suite for quality investigations, evidence-backed manufacturing knowledge, and operational fault triage.
 
@@ -73,11 +73,21 @@ The suite contains three end-to-end applications:
 
 ## Delivery status
 
-- **Phase 1 — Product foundation:** ✅ Complete
+- **Phase 1 — Product foundation:** ✅ Complete in version 0.2
 - **Phase 2 — Guided workflow configuration:** Planned
 - **Phase 3 — Data and connector studio:** Planned
 
 Phase 1 evidence and verification are documented in [`docs/PHASE_1_COMPLETION.md`](docs/PHASE_1_COMPLETION.md).
+
+## Version 0.2 — Human-readable results
+
+Every workflow now produces two complementary output experiences:
+
+- **Clear documentation view:** A plain-language record with familiar manufacturing headings, lists, review status, cautions, and evidence. No programming syntax is shown.
+- **Technical data:** The original JSON remains available for integrations, automation, testing, and future QMS/CMMS/MES connectors.
+- **Readable downloads:** Users can download Markdown for editing and printable HTML for sharing or saving as PDF through the browser.
+
+This separation allows business users to understand and review the result while technical teams retain a machine-readable contract.
 
 ## Architecture
 

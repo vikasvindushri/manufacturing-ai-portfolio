@@ -13,7 +13,9 @@ from shared.schemas import GeminiQualityReview,GeminiTriageReview
 from project_1_quality_8d.engine import build_8d
 from project_2_rag.retriever import chunks_from_dir,LocalRetriever
 from project_3_low_code_agent.agent import triage
+from shared.documents import quality_markdown,knowledge_markdown,fault_markdown,markdown_to_html
 ROOT=Path(__file__).resolve().parent
+APP_VERSION="0.2"
 st.set_page_config(page_title="Manufacturing AI Studio",page_icon="🏭",layout="wide",initial_sidebar_state="expanded")
 try: cfg=load_config()
 except ValueError as exc: st.error(str(exc));st.stop()
@@ -27,8 +29,12 @@ def errors(items):
     for x in items: st.write(f"- {x}")
     st.info("Your entries remain on screen. Correct the highlighted information and try again.")
 
-def download_record(label,record,name):
+def download_record(label,record,name,document_text=None,document_stem=None):
     st.download_button(label,json.dumps(record,indent=2),name,"application/json",use_container_width=True)
+    if document_text and document_stem:
+        c1,c2=st.columns(2)
+        c1.download_button("Download readable document (.md)",document_text,f"{document_stem}.md","text/markdown",use_container_width=True)
+        c2.download_button("Download printable document (.html)",markdown_to_html(document_text,document_stem.replace('_',' ').title()),f"{document_stem}.html","text/html",use_container_width=True)
 
 def quality_form():
     page("Quality & 8D Assistant","Guided incident intake, review, approval, and export.","QUALITY")
@@ -66,7 +72,10 @@ def quality_form():
         with tabs[2]:
             approver=st.text_input("Qualified approver",key="q_approver");evidence=st.checkbox("Evidence reviewed",key="q_evidence");approved=st.checkbox("Approve controlled follow-up",key="q_approved")
             if approver and evidence and approved:r["D8_closure"].update({"approved":True,"approver":approver});log("record_approved","quality",meta={"incident_id":r["source_incident"]["incident_id"]});st.success("Approval captured.")
-            download_record("Download complete quality record",r,"quality_case.json")
+            doc=quality_markdown(r)
+            st.markdown("### Clear documentation view")
+            st.markdown(doc)
+            download_record("Download technical data (.json)",r,"quality_case.json",doc,"quality_case_report")
 
 def rag_app():
     page("Manufacturing Knowledge Assistant","Search local guidance, inspect evidence, and capture feedback.","KNOWLEDGE")
@@ -98,7 +107,10 @@ def rag_app():
         useful=st.radio("Was this result useful?",["Not rated","Yes","Partly","No"],horizontal=True,key="r_feedback")
         note=st.text_input("Feedback note",key="r_note")
         if st.button("Save feedback"):r["feedback"]={"rating":useful,"note":note};log("feedback_saved","knowledge",meta={"rating":useful});st.success("Feedback saved in this session record.")
-        download_record("Download search record",r,"knowledge_search.json")
+        doc=knowledge_markdown(r)
+        st.markdown("### Clear documentation view")
+        st.markdown(doc)
+        download_record("Download technical data (.json)",r,"knowledge_search.json",doc,"knowledge_search_report")
 
 def fault_form():
     page("Fault Triage Agent","Guided fault intake, review, routing decision, and export.","OPERATIONS")
@@ -130,7 +142,10 @@ def fault_form():
         with tabs[2]:
             decision=st.selectbox("Reviewer decision",["Pending","Accept","Modify","Reject"]);note=st.text_area("Decision rationale");r["review"]={"decision":decision,"note":note}
             if decision!="Pending":log("review_decision","fault",meta={"decision":decision});st.success("Review decision captured.")
-            download_record("Download action record",r,"fault_action_record.json")
+            doc=fault_markdown(r)
+            st.markdown("### Clear documentation view")
+            st.markdown(doc)
+            download_record("Download technical data (.json)",r,"fault_action_record.json",doc,"fault_action_report")
 
 def history_page():
     page("Session History","Review records created during this browser session.","HISTORY")
@@ -138,7 +153,13 @@ def history_page():
     if not history:st.info("No records yet. Complete a workflow to create session history.");return
     for n,item in enumerate(history,1):
         with st.expander(f"{n}. {item['product'].title()} · {item['timestamp_utc']}"):
-            st.json(item["record"]);download_record("Download this record",item["record"],f"{item['product']}_{n}.json")
+            record=item["record"]
+            if item["product"]=="quality": doc=quality_markdown(record)
+            elif item["product"]=="knowledge": doc=knowledge_markdown(record)
+            elif item["product"]=="fault": doc=fault_markdown(record)
+            else: doc=None
+            if doc: st.markdown(doc)
+            download_record("Download technical data (.json)",record,f"{item['product']}_{n}.json",doc,f"{item['product']}_{n}_report" if doc else None)
     if st.button("Clear session history"):st.session_state["history"]=[];log("history_cleared","system");st.rerun()
 
 def about():
@@ -153,6 +174,7 @@ def about():
 
 with st.sidebar:
     st.title("Manufacturing AI Studio")
+    st.caption(f"Version {APP_VERSION}")
     nav=st.radio("Navigation",["Home","Quality & 8D","Knowledge Assistant","Fault Triage","Session History"],label_visibility="collapsed")
     st.divider();st.caption(f"Profile: {cfg.profile}");st.caption(f"Gemini: {'enabled' if cfg.gemini_enabled and enabled() else 'local mode'}")
     if st.session_state.get("last_audit"):st.caption(f"Last event: {st.session_state['last_audit']['event_type']}")
