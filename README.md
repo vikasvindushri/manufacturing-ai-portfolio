@@ -1,43 +1,58 @@
 # Advanced Manufacturing AI Portfolio
 
-Three runnable, practical AI transformation projects for Manufacturing, Quality, and Operations. The repository uses synthetic data and local, explainable methods so it can run without paid APIs.
+A polished, production-minded portfolio of three governed AI transformation projects for Manufacturing, Quality and Operations.
 
-## Projects
-1. **AI Quality & 8D Assistant** - extracts incident facts, drafts an 8D, proposes 5-Why paths and corrective actions, and requires human approval.
-2. **Manufacturing Knowledge Assistant (RAG)** - indexes local engineering/quality documents with TF-IDF and returns evidence-backed answers with references.
-3. **Low-Code Manufacturing AI Agent** - classifies manufacturing faults, recommends checks, and creates a structured action record suitable for Power Apps/AppSheet.
+## What is new in the advanced edition
+- Premium Streamlit experience with consistent visual language, metrics, tabs, chat and export workflows.
+- Dual-mode architecture: fully functional local logic plus optional Gemini enhancement.
+- Gemini structured outputs for quality review and fault triage.
+- Evidence-constrained Gemini synthesis for the RAG assistant.
+- Provenance metadata, human approval gates, cautious prompts and deterministic fallbacks.
+- Portfolio landing dashboard, Docker deployment, CI tests and low-code integration artifacts.
 
-## Quick start
+## Applications
+```bash
+streamlit run app.py
+streamlit run project_1_quality_8d/app.py
+streamlit run project_2_rag/app.py
+streamlit run project_3_low_code_agent/app.py
+```
+
+## Installation
 ```bash
 python -m venv .venv
-# Windows: .venv\Scripts\activate
-# macOS/Linux: source .venv/bin/activate
-pip install -r requirements.txt
-pytest
-streamlit run project_1_quality_8d/app.py
-```
-Run the other apps by replacing the path with `project_2_rag/app.py` or `project_3_low_code_agent/app.py`.
-
-## CLI examples
-```bash
-python -m project_1_quality_8d.cli --incident project_1_quality_8d/data/sample_incident.json
-python -m project_2_rag.cli --query "What should be checked after a torque failure?"
-python -m project_3_low_code_agent.cli --input project_3_low_code_agent/data/sample_fault.json
+# Git Bash on Windows
+source .venv/Scripts/activate
+python -m pip install -r requirements.txt
+python -m pytest
 ```
 
-## Portfolio capabilities
-Generative-AI solution framing, 8D/RCA/PFMEA thinking, structured extraction, retrieval-augmented generation concepts, human-in-the-loop governance, low-code design, Python, pandas, testing, CI, ROI and adoption planning.
+## Enable Gemini securely
+1. Copy `.env.example` to `.env`.
+2. Add your own API key; never commit it.
+3. Set `ENABLE_GEMINI=true`.
+4. Optionally change `GEMINI_MODEL` to a model available to your account.
 
-## Safety and scope
-This is a portfolio demonstrator, not a production quality-management system. Recommendations are hypotheses. A qualified engineer must validate containment, root cause, product disposition and corrective actions.
+```dotenv
+GEMINI_API_KEY=your_key_here
+GEMINI_MODEL=gemini-2.5-flash
+ENABLE_GEMINI=true
+```
 
-## Repository map
-- `docs/` stakeholder documentation, architecture, governance, security and demo guide
-- `project_1_quality_8d/` quality incident and 8D assistant
-- `project_2_rag/` local knowledge retrieval assistant
-- `project_3_low_code_agent/` fault triage workflow and connector examples
-- `tests/` automated tests
-- `.github/workflows/ci.yml` CI pipeline
+The official `google-genai` SDK is used. Local mode remains available when Gemini is disabled or unavailable.
 
-## License
-MIT. Synthetic examples only.
+## Architecture
+```mermaid
+flowchart LR
+ U[Manufacturing user] --> UI[Streamlit / Low-code]
+ UI --> L[Deterministic local engine]
+ L --> G{Gemini enabled?}
+ G -->|Yes| AI[Structured review / grounded synthesis]
+ G -->|No| F[Local fallback]
+ AI --> H[Human review gate]
+ F --> H
+ H --> E[Controlled export / downstream system]
+```
+
+## Responsible-use boundaries
+This repository is a demonstrator, not a production QMS, MES, CMMS or safety system. Do not use synthetic recommendations as product-disposition authority. Protect confidential manufacturing data and use only approved AI services.
