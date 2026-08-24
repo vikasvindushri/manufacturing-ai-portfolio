@@ -15,8 +15,11 @@ from project_2_rag.retriever import chunks_from_dir,LocalRetriever
 from project_3_low_code_agent.agent import triage
 from shared.documents import quality_markdown,knowledge_markdown,fault_markdown,markdown_to_html
 from services.workflows import run_quality,run_knowledge,run_fault
+from shared.readiness import quality_readiness,fault_readiness
+from shared.presentation import source_banner,readiness_panel,analysis_sections,report_header
+from shared.health import system_health
 ROOT=Path(__file__).resolve().parent
-APP_VERSION="0.3"
+APP_VERSION="0.4"
 st.set_page_config(page_title="Manufacturing AI Studio",page_icon="🏭",layout="wide",initial_sidebar_state="expanded")
 try: cfg=load_config()
 except ValueError as exc: st.error(str(exc));st.stop()
@@ -31,15 +34,7 @@ def errors(items):
     st.info("Your entries remain on screen. Correct the highlighted information and try again.")
 
 def show_ai_status(record):
-    provenance=record.get("provenance",{})
-    notice=provenance.get("user_notice","Result source information is unavailable.")
-    if provenance.get("gemini_used"):
-        st.success(notice)
-    elif provenance.get("gemini_status")=="failed":
-        st.warning(notice)
-        st.caption("You can continue reviewing, editing, and exporting the local result.")
-    else:
-        st.info(notice)
+    source_banner(record)
 
 def download_record(label,record,name,document_text=None,document_stem=None):
     st.download_button(label,json.dumps(record,indent=2),name,"application/json",use_container_width=True)
@@ -51,6 +46,9 @@ def download_record(label,record,name,document_text=None,document_stem=None):
 def quality_form():
     page("Quality & 8D Assistant","Guided incident intake, review, approval, and export.","QUALITY")
     governance_note("Root cause, product disposition, and permanent corrective action require qualified approval.")
+    data_class=st.selectbox("Data classification",["Synthetic / demonstration","Public","Internal non-sensitive","Confidential / restricted"],key="q_class")
+    case_ai=st.checkbox("Request optional Gemini review for this case",value=cfg.gemini_enabled and data_class in ["Synthetic / demonstration","Public","Internal non-sensitive"],disabled=(not cfg.gemini_enabled or data_class=="Confidential / restricted"),key="q_ai")
+    if data_class=="Confidential / restricted":st.info("Local processing only. Optional Gemini review is disabled for this classification.")
     samples={"Torque control":"project_1_quality_8d/data/sample_incident.json","Bearing seating":"project_1_quality_8d/data/bearing_incident.json"}
     choice=st.selectbox("Reusable scenario",list(samples)+["Blank form"],key="q_sample")
     if st.button("Load scenario",key="q_load"):
@@ -71,19 +69,34 @@ def quality_form():
         if err: errors(err);log("validation_failed","quality","error",{"count":len(err)})
         else:
             try:
-                requested=cfg.gemini_enabled
+                requested=case_ai
                 result=run_quality(clean,cfg.profile,requested,generate_structured if enabled() else None,model_name())
                 st.session_state["quality_result"]=result;add_history(st.session_state,"quality",result,cfg.history_limit)
                 log("record_generated","quality",meta={"incident_id":clean["incident_id"],"gemini_status":result["provenance"]["gemini_status"]})
             except Exception as exc: st.error("The review could not be generated.");st.code(str(exc));st.info("Check configuration, then retry. Local mode remains available if Gemini is disabled.");log("generation_failed","quality","error",{"error_type":type(exc).__name__})
     if "quality_result" in st.session_state:
-        r=st.session_state["quality_result"];show_ai_status(r);tabs=st.tabs(["Review and edit","Analysis","Approval and export"])
+        r=st.session_state["quality_result"]
+        src=r.get("source_incident",{});ready=quality_readiness(src);r["record_readiness"]=ready;r["data_classification"]=data_class
+        report_header("QUALITY INVESTIGATION REPORT",src.get("incident_id"),"Approved" if r.get("D8_closure",{}).get("approved") else "Draft — Human Review Required",src.get("owner"),r["provenance"].get("result_source","local"),APP_VERSION)
+        show_ai_status(r);readiness_panel(ready,"Investigation readiness")
+        facts=[f"{k.replace('_',' ').title()}: {v}" for k,v in src.items() if k not in ("missing_fields",) and v not in (None,"","UNKNOWN")]
+        recs=[a.get("action","") for a in r.get("D5_actions",[]) if a.get("action")]
+        analysis_sections(facts,ready["missing"],r.get("D4_root_cause_hypotheses",[]),recs)
+        tabs=st.tabs(["Review and edit","AI comparison","Approval and export"])
         with tabs[0]:
             r["D2_problem"]=st.text_area("Problem statement",r["D2_problem"]);r["D3_containment"]=st.text_area("Containment actions (one per line)","\n".join(r["D3_containment"])).splitlines();st.caption("Edits are included in the exported record.")
-        with tabs[1]: st.write("**Root-cause hypotheses**",r["D4_root_cause_hypotheses"]);st.write("**5-Why prompts**",r["D4_five_why_prompts"]);st.json(r.get("gemini_review",{"status":"Gemini not used"}))
+        with tabs[1]:
+            c1,c2=st.columns(2)
+            with c1:st.markdown("#### Local analysis");st.write("**Root-cause hypotheses**",r["D4_root_cause_hypotheses"]);st.write("**5-Why prompts**",r["D4_five_why_prompts"])
+            with c2:st.markdown("#### Optional Gemini review");st.json(r.get("gemini_review",{"status":"Not used","message":"This result was generated locally."}))
+            if cfg.gemini_enabled and not r.get("provenance",{}).get("gemini_used") and data_class!="Confidential / restricted":
+                if st.button("Retry optional Gemini review",key="q_retry"):
+                    retry=run_quality(src,cfg.profile,True,generate_structured if enabled() else None,model_name());r["gemini_review"]=retry.get("gemini_review");r["provenance"]=retry["provenance"];log("gemini_retry","quality",meta={"gemini_status":r["provenance"]["gemini_status"]});st.rerun()
         with tabs[2]:
-            approver=st.text_input("Qualified approver",key="q_approver");evidence=st.checkbox("Evidence reviewed",key="q_evidence");approved=st.checkbox("Approve controlled follow-up",key="q_approved")
-            if approver and evidence and approved:r["D8_closure"].update({"approved":True,"approver":approver});log("record_approved","quality",meta={"incident_id":r["source_incident"]["incident_id"]});st.success("Approval captured.")
+            decision=st.selectbox("Review decision",["Pending","Accept","Accept with modifications","Return for more information","Reject","Escalate"],key="q_decision")
+            a,b=st.columns(2);approver=a.text_input("Reviewer name",key="q_approver");role=b.text_input("Reviewer role",key="q_role");rationale=st.text_area("Decision rationale",key="q_rationale");followup=st.text_area("Required follow-up",key="q_followup");evidence=st.checkbox("Evidence reviewed",key="q_evidence")
+            r["human_review"]={"decision":decision,"reviewer":approver,"role":role,"rationale":rationale,"required_follow_up":followup,"evidence_reviewed":evidence}
+            if decision in ("Accept","Accept with modifications") and approver and role and evidence:r["D8_closure"].update({"approved":True,"approver":approver});log("record_approved","quality",meta={"incident_id":r["source_incident"]["incident_id"],"decision":decision});st.success("Review decision captured.")
             doc=quality_markdown(r)
             st.markdown("### Clear documentation view")
             st.markdown(doc)
@@ -92,6 +105,9 @@ def quality_form():
 def rag_app():
     page("Manufacturing Knowledge Assistant","Search local guidance, inspect evidence, and capture feedback.","KNOWLEDGE")
     governance_note("Confirm document revision, applicability, and authority before acting.")
+    data_class=st.selectbox("Question data classification",["Synthetic / demonstration","Public","Internal non-sensitive","Confidential / restricted"],key="r_class")
+    query_ai=st.checkbox("Request optional Gemini synthesis",value=cfg.gemini_enabled and data_class!="Confidential / restricted",disabled=(not cfg.gemini_enabled or data_class=="Confidential / restricted"),key="r_ai")
+    if data_class=="Confidential / restricted":st.info("Local retrieval only. Optional Gemini synthesis is disabled for this classification.")
     @st.cache_resource
     def load():
         ch=chunks_from_dir(str(ROOT/"project_2_rag"/"knowledge_base"));return LocalRetriever(ch),ch
@@ -104,13 +120,15 @@ def rag_app():
         if err:errors(err);log("validation_failed","knowledge","error")
         else:
             try:
-                requested=cfg.gemini_enabled
+                requested=query_ai
                 result=run_knowledge(query,retriever,cfg.profile,requested,generate_grounded_answer if enabled() else None)
                 st.session_state["rag_result"]=result;add_history(st.session_state,"knowledge",result,cfg.history_limit)
                 log("search_completed","knowledge",meta={"match_count":len(result["matches"]),"gemini_status":result["provenance"]["gemini_status"]})
             except Exception as exc:st.error("Search could not be completed.");st.code(str(exc));st.info("Verify the knowledge-base files and configuration, then retry.");log("search_failed","knowledge","error",{"error_type":type(exc).__name__})
     if "rag_result" in st.session_state:
-        r=st.session_state["rag_result"];show_ai_status(r);st.subheader("Answer");st.write(r["answer"])
+        r=st.session_state["rag_result"];r["data_classification"]=data_class
+        report_header("MANUFACTURING KNOWLEDGE RECORD","Search result",r.get("status","Draft"),"Knowledge user",r.get("provenance",{}).get("result_source","local"),APP_VERSION)
+        show_ai_status(r);st.subheader("Answer");st.write(r["answer"])
         for h in r["matches"]:
             with st.expander(f"{h['source']} · chunk {h['chunk']} · relevance {h['score']:.2f}"):st.write(h["text"])
         useful=st.radio("Was this result useful?",["Not rated","Yes","Partly","No"],horizontal=True,key="r_feedback")
@@ -124,6 +142,9 @@ def rag_app():
 def fault_form():
     page("Fault Triage Agent","Guided fault intake, review, routing decision, and export.","OPERATIONS")
     governance_note("Follow approved safety and lockout/tagout requirements. Never bypass safeguards.")
+    data_class=st.selectbox("Data classification",["Synthetic / demonstration","Public","Internal non-sensitive","Confidential / restricted"],key="f_class")
+    case_ai=st.checkbox("Request optional Gemini review for this case",value=cfg.gemini_enabled and data_class!="Confidential / restricted",disabled=(not cfg.gemini_enabled or data_class=="Confidential / restricted"),key="f_ai")
+    if data_class=="Confidential / restricted":st.info("Local processing only. Optional Gemini review is disabled for this classification.")
     samples={"Hydraulic pressure":"project_3_low_code_agent/data/sample_fault.json","Motor overheat":"project_3_low_code_agent/data/sample_overheat_fault.json"}
     choice=st.selectbox("Reusable scenario",list(samples)+["Blank form"],key="f_sample")
     if st.button("Load scenario",key="f_load"):
@@ -139,19 +160,31 @@ def fault_form():
         if err:errors(err);log("validation_failed","fault","error",{"count":len(err)})
         else:
             try:
-                requested=cfg.gemini_enabled
+                requested=case_ai
                 r=run_fault(clean,cfg.profile,requested,generate_structured if enabled() else None,model_name())
                 st.session_state["fault_result"]=r;add_history(st.session_state,"fault",r,cfg.history_limit)
                 log("record_generated","fault",meta={"fault_id":clean["fault_id"],"gemini_status":r["provenance"]["gemini_status"]})
             except Exception as exc:st.error("The triage record could not be created.");st.code(str(exc));st.info("Check the form and configuration, then retry in local mode if necessary.");log("generation_failed","fault","error",{"error_type":type(exc).__name__})
     if "fault_result" in st.session_state:
-        r=st.session_state["fault_result"];show_ai_status(r);tabs=st.tabs(["Review and edit","AI review","Decision and export"])
+        r=st.session_state["fault_result"]
+        ready=fault_readiness(r.get("source",{}));r["record_readiness"]=ready;r["data_classification"]=data_class
+        report_header("MANUFACTURING FAULT TRIAGE RECORD",r.get("fault_id"),r.get("status","Draft").replace("_"," ").title(),r.get("assigned_role"),r.get("provenance",{}).get("result_source","local"),APP_VERSION)
+        show_ai_status(r);readiness_panel(ready,"Triage record readiness")
+        facts=[f"{k.replace('_',' ').title()}: {v}" for k,v in r.get("source",{}).items() if v not in (None,"")]
+        analysis_sections(facts,ready["missing"],r.get("likely_causes",[]),r.get("diagnostic_checks",[]))
+        tabs=st.tabs(["Review and edit","AI comparison","Decision and export"])
         with tabs[0]:
             r["likely_causes"]=st.text_area("Likely causes (one per line)","\n".join(r["likely_causes"])).splitlines();r["diagnostic_checks"]=st.text_area("Diagnostic checks (one per line)","\n".join(r["diagnostic_checks"])).splitlines()
-        with tabs[1]:st.json(r.get("gemini_review",{"status":"Gemini not used"}))
+        with tabs[1]:
+            c1,c2=st.columns(2)
+            with c1:st.markdown("#### Local analysis");st.write("**Classification**",r.get("category"));st.write("**Likely causes**",r.get("likely_causes"));st.write("**Checks**",r.get("diagnostic_checks"))
+            with c2:st.markdown("#### Optional Gemini review");st.json(r.get("gemini_review",{"status":"Not used","message":"This result was generated locally."}))
+            if cfg.gemini_enabled and not r.get("provenance",{}).get("gemini_used") and data_class!="Confidential / restricted":
+                if st.button("Retry optional Gemini review",key="f_retry"):
+                    retry=run_fault(r.get("source",{}),cfg.profile,True,generate_structured if enabled() else None,model_name());r["gemini_review"]=retry.get("gemini_review");r["provenance"]=retry["provenance"];log("gemini_retry","fault",meta={"gemini_status":r["provenance"]["gemini_status"]});st.rerun()
         with tabs[2]:
-            decision=st.selectbox("Reviewer decision",["Pending","Accept","Modify","Reject"]);note=st.text_area("Decision rationale");r["review"]={"decision":decision,"note":note}
-            if decision!="Pending":log("review_decision","fault",meta={"decision":decision});st.success("Review decision captured.")
+            decision=st.selectbox("Reviewer decision",["Pending","Accept","Accept with modifications","Return for more information","Reject","Escalate"]);a,b=st.columns(2);reviewer=a.text_input("Reviewer name",key="f_reviewer");role=b.text_input("Reviewer role",key="f_role");note=st.text_area("Decision rationale");followup=st.text_area("Required follow-up",key="f_followup");r["review"]={"decision":decision,"reviewer":reviewer,"role":role,"note":note,"required_follow_up":followup}
+            if decision!="Pending" and reviewer and role:log("review_decision","fault",meta={"decision":decision});st.success("Review decision captured.")
             doc=fault_markdown(r)
             st.markdown("### Clear documentation view")
             st.markdown(doc)
@@ -172,6 +205,14 @@ def history_page():
             download_record("Download technical data (.json)",record,f"{item['product']}_{n}.json",doc,f"{item['product']}_{n}_report" if doc else None)
     if st.button("Clear session history"):st.session_state["history"]=[];log("history_cleared","system");st.rerun()
 
+def health_page():
+    page("System Health","Current availability of core local services and optional integrations.","SYSTEM")
+    st.info("Core local workflows remain available even when Gemini is disabled or unavailable.")
+    for item in system_health(cfg,enabled()):
+        a,b=st.columns([2,1]);a.write(item["component"]);b.success(item["status"]) if "Available" in item["status"] or "document" in item["status"] or item["status"]=="Enabled" else b.info(item["status"])
+    st.markdown("### Diagnostics")
+    st.code("python scripts/check_environment.py\npython scripts/test_gemini_connection.py\npython scripts/accessibility_check.py")
+
 def about():
     page("Manufacturing AI Studio","A reliable, guided suite for quality, knowledge, and operational workflows.","HOME")
     metric_row([("Products","3","Unified"),("Profile",cfg.profile,None),("Gemini","Enabled" if cfg.gemini_enabled and enabled() else "Local mode",None),("Session records",str(len(st.session_state.get('history',[]))),None)])
@@ -185,7 +226,7 @@ def about():
 with st.sidebar:
     st.title("Manufacturing AI Studio")
     st.caption(f"Version {APP_VERSION}")
-    nav=st.radio("Navigation",["Home","Quality & 8D","Knowledge Assistant","Fault Triage","Session History"],label_visibility="collapsed")
+    nav=st.radio("Navigation",["Home","Quality & 8D","Knowledge Assistant","Fault Triage","Session History","System Health"],label_visibility="collapsed")
     st.divider();st.caption(f"Profile: {cfg.profile}");st.caption(f"Gemini: {'enabled' if cfg.gemini_enabled and enabled() else 'local mode'}")
     if st.session_state.get("last_audit"):st.caption(f"Last event: {st.session_state['last_audit']['event_type']}")
-{"Home":about,"Quality & 8D":quality_form,"Knowledge Assistant":rag_app,"Fault Triage":fault_form,"Session History":history_page}[nav]()
+{"Home":about,"Quality & 8D":quality_form,"Knowledge Assistant":rag_app,"Fault Triage":fault_form,"Session History":history_page,"System Health":health_page}[nav]()

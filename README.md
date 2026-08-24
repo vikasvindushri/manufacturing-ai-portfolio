@@ -1,4 +1,4 @@
-# Manufacturing AI Studio — v0.3
+# Manufacturing AI Studio — v0.4
 
 > A governed, local-first product suite for quality investigations, evidence-backed manufacturing knowledge, and operational fault triage.
 
@@ -98,6 +98,10 @@ Gemini is an optional enrichment and never blocks a successful local workflow. E
 - **Successful enhancement:** The result identifies both the local engine and Gemini review while retaining mandatory human validation.
 
 Quality, knowledge retrieval, and fault triage preserve their local result when the Gemini API is unavailable, misconfigured, rate-limited, or returns an invalid response.
+
+## Version 0.4 — Phase 1 product hardening
+
+Version 0.4 adds professional report headers, visible result-source status, record-readiness indicators, clear separation of facts, gaps, hypotheses, and recommendations, side-by-side local and Gemini views, retryable AI enrichment, expanded human review, per-case data classification, per-case AI selection, and a system-health page.
 
 ## Architecture
 

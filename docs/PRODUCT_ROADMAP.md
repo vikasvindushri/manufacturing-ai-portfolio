@@ -4,7 +4,7 @@
 
 Evolve Manufacturing AI Studio from three demonstration applications into a governed workflow environment in which business users can configure, run, review, and improve manufacturing AI workflows through guided interfaces rather than source-code changes.
 
-## Phase 1 — Product foundation ✅ COMPLETE — Version 0.3
+## Phase 1 — Product foundation ✅ COMPLETE — Version 0.4
 
 **Goal:** Make the current suite reliable and easy to operate.
 

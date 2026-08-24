@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.4 — 2026-08-23
+
+### Added
+- Professional report headers and status summaries.
+- Facts, evidence gaps, hypotheses, and recommendations display.
+- Investigation and triage readiness indicators.
+- Side-by-side local and optional Gemini analysis.
+- Retry Gemini enhancement without discarding local work.
+- Expanded review decisions, reviewer role, rationale, and follow-up.
+- Per-case data classification and optional AI selection.
+- System Health page.
+- Improved print-ready HTML styling.
+
 ## 0.3 — 2026-08-23
 
 ### Fixed
