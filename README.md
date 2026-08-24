@@ -1,8 +1,9 @@
-# Manufacturing AI Studio — v0.4
+# Manufacturing AI Studio
 
 > A governed, local-first product suite for quality investigations, evidence-backed manufacturing knowledge, and operational fault triage.
 
 [![CI](https://github.com/vikasvindushri/manufacturing-ai-portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/vikasvindushri/manufacturing-ai-portfolio/actions)
+![Version](https://img.shields.io/badge/version-v0.4-087F8C)
 ![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB)
 ![Streamlit](https://img.shields.io/badge/UI-Streamlit-FF4B4B)
 ![Gemini](https://img.shields.io/badge/AI-Gemini%20optional-4285F4)
@@ -10,15 +11,37 @@
 
 ## Overview
 
-Manufacturing teams frequently lose time converting unstructured incidents into investigation records, locating applicable engineering knowledge, and coordinating consistent first-response fault triage. Manufacturing AI Studio demonstrates how transparent local logic, optional Gemini assistance, cited evidence, structured records, and human approval gates can improve these workflows without transferring accountable decisions to an AI system.
+Manufacturing teams frequently lose time converting unstructured incidents into investigation records, locating applicable engineering knowledge, and coordinating consistent first-response fault triage. Manufacturing AI Studio shows how transparent local logic, optional Gemini assistance, cited evidence, structured records, and human approval gates can improve these workflows without transferring accountable decisions to an AI system.
 
-The suite contains three end-to-end applications:
+The suite contains three guided applications:
 
-1. **Quality & 8D Assistant** — creates a structured investigation draft, evidence checklist, cause hypotheses, and controlled case export.
+1. **Quality & 8D Assistant** — creates a structured investigation draft, evidence checklist, cause hypotheses, review record, and controlled case export.
 2. **Manufacturing Knowledge Assistant** — retrieves local engineering and quality evidence, displays references, and optionally produces a grounded Gemini synthesis.
 3. **Fault Triage Agent** — classifies a reported issue, proposes diagnostic checks, captures human review, and produces an integration-ready action record.
 
-## Business use cases
+## Delivery Status
+
+- **Current release:** v0.4
+- **Phase 1 — Product Foundation:** Complete
+- **Phase 2 — Guided Workflow Configuration:** Planned
+- **Phase 3 — Data and Connector Studio:** Planned
+- **Phase 4 — Governance and Evaluation Center:** Planned
+- **Phase 5 — Visual Workflow Studio:** Planned
+- **Phase 6 — Enterprise Productization:** Planned
+
+Version 0.4 completes the Phase 1 product-hardening scope with professional report presentation, record-readiness indicators, transparent local and Gemini analysis, per-case AI controls, expanded human review, data classification, and system-health visibility.
+
+- [View the full release history](CHANGELOG.md)
+- [Review the product roadmap](docs/PRODUCT_ROADMAP.md)
+- [Review Phase 1 completion evidence](docs/PHASE_1_COMPLETION.md)
+
+## Product Maturity
+
+Manufacturing AI Studio v0.4 is a working Phase 1 product foundation. It provides guided workflows, local processing, optional Gemini enhancement, human review controls, readable reports, technical exports, session history, audit events, environment profiles, and automated tests.
+
+It is not yet an enterprise production system. Persistent multi-user storage, authentication, approved business-system connectors, centralized monitoring, and formal operational validation are planned for later phases.
+
+## Business Use Cases
 
 ### Quality & 8D Assistant
 
@@ -28,13 +51,13 @@ The suite contains three end-to-end applications:
 
 **Workflow:**
 
-1. Enter or upload an incident.
+1. Select a reusable scenario or enter an incident through a validated form.
 2. Normalize facts and identify missing information.
 3. Generate a deterministic 8D scaffold.
-4. Review root-cause hypotheses and 5-Why prompts.
-5. Optionally request a structured Gemini review.
-6. Capture qualified human approval.
-7. Export the complete case record.
+4. Review facts, evidence gaps, root-cause hypotheses, 5-Why prompts, and action candidates.
+5. Optionally request a Gemini review when policy and data classification permit it.
+6. Record a qualified human review decision.
+7. Export a readable report or technical JSON record.
 
 **Expected value:** Reduced preparation time, improved information consistency, stronger evidence discipline, and more auditable handoffs.
 
@@ -46,11 +69,12 @@ The suite contains three end-to-end applications:
 
 **Workflow:**
 
-1. Ask a natural-language question.
+1. Ask a validated natural-language question.
 2. Retrieve ranked local evidence.
-3. Inspect source and chunk references.
-4. Optionally synthesize a response with Gemini using only the retrieved context.
+3. Inspect source, chunk, and relevance information.
+4. Optionally synthesize a response with Gemini using only retrieved context.
 5. Verify document applicability before use.
+6. Record feedback and export the search record.
 
 **Expected value:** Reduced search time, improved traceability, and more consistent access to controlled knowledge.
 
@@ -62,76 +86,62 @@ The suite contains three end-to-end applications:
 
 **Workflow:**
 
-1. Submit a structured fault event.
-2. Classify the issue using transparent rules.
-3. Review likely causes and diagnostic checks.
+1. Select a sample scenario or enter a fault through a validated form.
+2. Classify the issue using transparent local rules.
+3. Review facts, evidence gaps, likely causes, and diagnostic checks.
 4. Optionally request a Gemini second-pass review.
-5. Accept, modify, or reject the recommendation.
-6. Export an action record for a downstream workflow.
+5. Accept, modify, return, reject, or escalate the recommendation.
+6. Export a readable action report or technical JSON record.
 
 **Expected value:** More consistent escalation, clearer ownership, and structured data for future CMMS, QMS, or MES integration.
 
-## Delivery status
+## Key Capabilities
 
-- **Phase 1 — Product foundation:** ✅ Complete in version 0.3
-- **Phase 2 — Guided workflow configuration:** Planned
-- **Phase 3 — Data and connector studio:** Planned
-
-Phase 1 evidence and verification are documented in [`docs/PHASE_1_COMPLETION.md`](docs/PHASE_1_COMPLETION.md).
-
-## Version 0.2 — Human-readable results
-
-Every workflow now produces two complementary output experiences:
-
-- **Clear documentation view:** A plain-language record with familiar manufacturing headings, lists, review status, cautions, and evidence. No programming syntax is shown.
-- **Technical data:** The original JSON remains available for integrations, automation, testing, and future QMS/CMMS/MES connectors.
-- **Readable downloads:** Users can download Markdown for editing and printable HTML for sharing or saving as PDF through the browser.
-
-This separation allows business users to understand and review the result while technical teams retain a machine-readable contract.
-
-## Version 0.3 — Resilient local execution
-
-Gemini is an optional enrichment and never blocks a successful local workflow. Every result now states its source clearly:
-
-- **Local mode:** “Result generated by the local deterministic engine. Gemini AI was not used.”
-- **Runtime fallback:** “Result generated successfully by the local deterministic engine. The optional Gemini AI enhancement was unavailable and was not used.”
-- **Successful enhancement:** The result identifies both the local engine and Gemini review while retaining mandatory human validation.
-
-Quality, knowledge retrieval, and fault triage preserve their local result when the Gemini API is unavailable, misconfigured, rate-limited, or returns an invalid response.
-
-## Version 0.4 — Phase 1 product hardening
-
-Version 0.4 adds professional report headers, visible result-source status, record-readiness indicators, clear separation of facts, gaps, hypotheses, and recommendations, side-by-side local and Gemini views, retryable AI enrichment, expanded human review, per-case data classification, per-case AI selection, and a system-health page.
+- Unified navigation across all three workflows
+- Validated forms and reusable sample scenarios
+- Local deterministic processing that works without Gemini
+- Resilient Gemini fallback that preserves successful local outcomes
+- Explicit result-source and AI-use notices
+- Professional report headers and readiness indicators
+- Clear separation of facts, gaps, hypotheses, and recommendations
+- Side-by-side local and optional Gemini analysis
+- Editable review screens and expanded human decisions
+- Per-case data classification and AI selection
+- Session drafts, history, feedback, and structured audit events
+- Readable Markdown, printable HTML, and technical JSON downloads
+- Environment profiles and system-health diagnostics
+- Automated tests and GitHub Actions CI
 
 ## Architecture
 
 ```mermaid
 flowchart LR
-  U[Manufacturing user] --> UX[Guided product experience]
+  U[Manufacturing user] --> UX[Guided Streamlit experience]
   UX --> V[Input validation]
   V --> L[Transparent local engine]
-  L --> G{Gemini enabled?}
+  L --> G{Optional Gemini requested?}
+  G -->|No| P[Provenance and result-source notice]
   G -->|Yes| AI[Structured review or grounded synthesis]
-  G -->|No| F[Deterministic fallback]
-  AI --> P[Provenance and evidence]
+  AI -->|Success| P
+  AI -->|Unavailable| F[Preserve local result]
   F --> P
   P --> H{Human review}
-  H -->|Approve or modify| E[Controlled export]
-  H -->|Reject| R[Recorded rationale]
-  E --> I[QMS / CMMS / MES / workflow integration]
+  H -->|Approve or modify| E[Readable report and technical export]
+  H -->|Return, reject, or escalate| R[Decision rationale and follow-up]
+  E --> I[Future QMS / CMMS / MES integration]
 ```
 
-## Product principles
+## Reliability Model
 
-- **Local-first:** Core functionality works without a paid AI service.
-- **Evidence-first:** Recommendations remain linked to supplied facts or retrieved text.
-- **Human-owned decisions:** AI prepares and recommends; accountable personnel decide.
-- **Safe failure:** Missing evidence, disabled Gemini, and retrieval failure produce visible fallback behavior.
-- **Audit-ready outputs:** Exports contain source data, status, provenance, review, and approval fields.
-- **Integration-ready contracts:** JSON schemas and workflow documentation support enterprise evolution.
-- **Guided usability:** Sample data and clear steps allow users to explore each workflow with minimal setup.
+Local processing is the dependable baseline. Gemini is an optional enrichment and never blocks a successful local workflow.
 
-## Quick start
+- **Local result:** “Result generated by the local deterministic engine. Gemini AI was not used.”
+- **Fallback result:** “Result generated successfully by the local deterministic engine. The optional Gemini AI enhancement was unavailable and was not used.”
+- **Enhanced result:** The record identifies both the local engine and the optional Gemini review while preserving mandatory human validation.
+
+See [Local and Gemini Execution](docs/LOCAL_AND_GEMINI_EXECUTION.md) for the detailed behavior and status model.
+
+## Quick Start
 
 ### Windows Git Bash
 
@@ -157,105 +167,174 @@ python -m streamlit run app.py
 
 Open `http://localhost:8501` if the browser does not open automatically.
 
-## Run an individual application
+## Configuration
 
-Run commands from the repository root:
+The default local profile does not require an AI API key.
 
-```bash
-# Helpful for Git Bash when launching a nested Streamlit app
-export PYTHONPATH="$PWD"
-
-python -m streamlit run project_1_quality_8d/app.py
-python -m streamlit run project_2_rag/app.py
-python -m streamlit run project_3_low_code_agent/app.py
+```dotenv
+APP_PROFILE=local
+ENABLE_GEMINI=false
+GEMINI_MODEL=gemini-3.6-flash
 ```
 
-## Optional Gemini setup
-
-Gemini is disabled by default so the suite remains functional without an API key.
+To enable optional Gemini enhancement, copy the example configuration:
 
 ```bash
 cp .env.example .env
 ```
 
-Edit `.env`:
+Then set:
 
 ```dotenv
+APP_PROFILE=gemini
+ENABLE_GEMINI=true
 GEMINI_API_KEY=your_private_key
 GEMINI_MODEL=gemini-3.6-flash
-ENABLE_GEMINI=true
 ```
 
-Never commit `.env`. Verify that Git ignores it:
+Never commit `.env`. Confirm that Git ignores it:
 
 ```bash
 git check-ignore -v .env
 ```
 
-Check the local configuration:
+Run configuration and connection diagnostics:
+
+```bash
+python scripts/check_environment.py
+python scripts/test_gemini_connection.py
+```
+
+## Using the Product
+
+Start the unified application:
+
+```bash
+python -m streamlit run app.py
+```
+
+Use the left navigation for:
+
+- Home
+- Quality & 8D
+- Knowledge Assistant
+- Fault Triage
+- Session History
+- System Health
+
+Each workflow provides sample scenarios, validated inputs, visible analysis provenance, editable review, human decisions, and downloads.
+
+For a concise walkthrough, see [Product Demonstration](docs/PRODUCT_DEMONSTRATION.md). For operating guidance, see the [User Guide](docs/USER_GUIDE.md).
+
+## Output Formats
+
+Every completed workflow supports complementary audiences:
+
+- **Readable Markdown** — editable plain-language business record
+- **Printable HTML** — professional browser view that can be printed or saved as PDF
+- **Technical JSON** — machine-readable contract for integration, automation, testing, and future system persistence
+
+The interface also displays a clear documentation view without programming syntax.
+
+## Testing and Diagnostics
+
+Run the automated test suite:
+
+```bash
+python -m pytest
+```
+
+Run accessibility source checks:
+
+```bash
+python scripts/accessibility_check.py
+```
+
+Run environment diagnostics:
 
 ```bash
 python scripts/check_environment.py
 ```
 
-Test a real Gemini request:
+The repository includes tests for local processing, Gemini success and failure states, fallback preservation, validation, retrieval, reports, readiness, audit redaction, configuration profiles, and system health.
 
-```bash
-python scripts/test_gemini_connection.py
-```
+## Evaluation and Operating Metrics
 
-## Guided product demonstration
+The product is designed to support measurement across later phases:
 
-A concise end-to-end walkthrough is available in [`docs/PRODUCT_DEMONSTRATION.md`](docs/PRODUCT_DEMONSTRATION.md).
+- Quality preparation time and required-field completeness
+- Retrieval recall, citation coverage, and no-evidence behavior
+- Unsupported-claim rate
+- Triage agreement with qualified experts
+- Human modification, rejection, and escalation rates
+- Gemini availability and local-fallback completion
+- Workflow completion, repeat use, and validated time savings
 
-Recommended flow:
+Phase 1 provides measurement instrumentation. Formal baseline comparison begins in Phase 2, operational pilot measurement expands in Phase 3, and governed monitoring is planned for Phase 4.
 
-1. Generate the supplied torque incident in the Quality Assistant.
-2. Inspect evidence gaps, hypotheses, provenance, and the approval gate.
-3. Ask the Knowledge Assistant what should be checked after a torque failure.
-4. Inspect the retrieved references and no-evidence behavior.
-5. Process the hydraulic-pressure sample in the Fault Triage Agent.
-6. Record a human decision and inspect the exported action payload.
+See the [Test and Evaluation Plan](docs/TEST_AND_EVALUATION_PLAN.md) and [ROI Model](docs/ROI_MODEL.md).
 
-## Evaluation and operating metrics
-
-| Capability | Example metric | Purpose |
-|---|---:|---|
-| Quality preparation | Median intake-to-draft time | Measures cycle-time improvement |
-| Investigation completeness | Required-field completion rate | Measures consistency |
-| Retrieval | Recall@k and citation coverage | Measures evidence quality |
-| Grounding | Unsupported-claim rate | Measures response reliability |
-| Triage | Agreement with expert classification | Measures operational usefulness |
-| Governance | Human override and rejection rate | Identifies weak recommendations |
-| Adoption | Active users and repeat use | Measures practical value |
-| Business value | Validated hours saved and cost range | Supports responsible ROI analysis |
-
-## Repository structure
+## Repository Structure
 
 ```text
 manufacturing-ai-portfolio/
-├── app.py                          # Product-suite landing page
-├── shared/                         # Theme, Gemini service, typed schemas
-├── project_1_quality_8d/           # Quality investigation application
-├── project_2_rag/                  # Evidence-backed knowledge application
-├── project_3_low_code_agent/       # Fault triage application
-├── docs/                           # Product, user, governance, and roadmap docs
-├── scripts/                        # Environment and Gemini diagnostics
-├── tests/                          # Automated tests
+├── app.py                          # Unified product application
+├── services/                       # Resilient workflow orchestration
+├── shared/                         # UI, reports, configuration, audit, and Gemini services
+├── config/profiles/                # Local, Gemini, and demonstration profiles
+├── project_1_quality_8d/           # Quality investigation engine and samples
+├── project_2_rag/                  # Evidence retrieval engine and knowledge base
+├── project_3_low_code_agent/       # Fault triage engine and workflow schemas
+├── docs/                           # Product, user, governance, and roadmap documentation
+├── scripts/                        # Environment, connection, and accessibility diagnostics
+├── tests/                          # Automated test suite
 ├── .github/                        # CI and contribution templates
+├── CHANGELOG.md                    # Release history from v0.2 onward
+├── VERSION                         # Current release number
 ├── Dockerfile
 ├── docker-compose.yml
 └── requirements.txt
 ```
 
-## Product evolution
+## Documentation
 
-The staged evolution plan is documented in [`docs/PRODUCT_ROADMAP.md`](docs/PRODUCT_ROADMAP.md). It progresses from the current local prototype to a guided workflow studio with configurable forms, reusable templates, approved connectors, role-based control, evaluation, and enterprise deployment capabilities.
+### Product and Planning
 
-## Responsible use
+- [Executive Summary](docs/EXECUTIVE_SUMMARY.md)
+- [Product Requirements](docs/PRODUCT_REQUIREMENTS.md)
+- [Product Roadmap](docs/PRODUCT_ROADMAP.md)
+- [Phase 1 Completion](docs/PHASE_1_COMPLETION.md)
+- [Release History](CHANGELOG.md)
+
+### User Guidance
+
+- [User Guide](docs/USER_GUIDE.md)
+- [Product Demonstration](docs/PRODUCT_DEMONSTRATION.md)
+
+### Architecture, AI, and Operations
+
+- [Architecture](docs/ARCHITECTURE.md)
+- [Local and Gemini Execution](docs/LOCAL_AND_GEMINI_EXECUTION.md)
+- [Gemini Integration](docs/GEMINI_INTEGRATION.md)
+- [Governance](docs/GOVERNANCE.md)
+- [Security and Data Handling](docs/SECURITY.md)
+
+### Evaluation and Value
+
+- [Test and Evaluation Plan](docs/TEST_AND_EVALUATION_PLAN.md)
+- [ROI Model](docs/ROI_MODEL.md)
+- [AI Use-Case Canvas](docs/USE_CASE_CANVAS.md)
+
+## Responsible Use
 
 This repository is a demonstrator, not a production QMS, MES, CMMS, safety system, or product-disposition authority. Never bypass safeguards or approved procedures. Do not send confidential drawings, production records, personal data, supplier data, or export-controlled content to an unapproved AI service.
 
+Record readiness measures intake completeness; it does not represent AI accuracy, root-cause confidence, or probability of correctness. Qualified personnel remain responsible for evidence validation, disposition, corrective action, approval, and closure.
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution expectations and data-handling requirements.
+
 ## License
 
-MIT. Synthetic examples only.
+MIT. See [LICENSE](LICENSE). Synthetic examples only.
