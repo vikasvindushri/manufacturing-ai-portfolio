@@ -8,10 +8,12 @@ from shared.config import load_config
 from shared.validation import validate_quality,validate_fault,validate_query
 from shared.audit import audit_event
 from shared.history import add_history,save_draft,load_draft
-from shared.gemini_service import enabled,generate_structured,generate_grounded_answer,model_name
+from shared.gemini_service import enabled,generate_structured,generate_grounded_answer,model_name,embed_texts
 from shared.schemas import GeminiQualityReview,GeminiTriageReview
 from project_1_quality_8d.engine import build_8d
-from project_2_rag.retriever import chunks_from_dir,LocalRetriever
+from project_2_rag.retriever import chunks_from_dir,HybridRetriever
+from project_2_rag.ingestion import extract_text,chunk_document
+from project_2_rag.knowledge_service import evidence_sufficiency,local_answer,format_answer
 from project_3_low_code_agent.agent import triage
 from shared.documents import quality_markdown,knowledge_markdown,fault_markdown,markdown_to_html
 from services.workflows import run_quality,run_knowledge,run_fault
@@ -19,7 +21,7 @@ from shared.readiness import quality_readiness,fault_readiness
 from shared.presentation import source_banner,readiness_panel,analysis_sections,report_header
 from shared.health import system_health
 ROOT=Path(__file__).resolve().parent
-APP_VERSION="0.4"
+APP_VERSION="0.5"
 st.set_page_config(page_title="Manufacturing AI Studio",page_icon="🏭",layout="wide",initial_sidebar_state="expanded")
 try: cfg=load_config()
 except ValueError as exc: st.error(str(exc));st.stop()
@@ -103,41 +105,90 @@ def quality_form():
             download_record("Download technical data (.json)",r,"quality_case.json",doc,"quality_case_report")
 
 def rag_app():
-    page("Manufacturing Knowledge Assistant","Search local guidance, inspect evidence, and capture feedback.","KNOWLEDGE")
+    page("Manufacturing Knowledge Assistant","Ask conversational questions and receive evidence-backed answers from approved local knowledge.","KNOWLEDGE")
     governance_note("Confirm document revision, applicability, and authority before acting.")
-    data_class=st.selectbox("Question data classification",["Synthetic / demonstration","Public","Internal non-sensitive","Confidential / restricted"],key="r_class")
-    query_ai=st.checkbox("Request optional Gemini synthesis",value=cfg.gemini_enabled and data_class!="Confidential / restricted",disabled=(not cfg.gemini_enabled or data_class=="Confidential / restricted"),key="r_ai")
-    if data_class=="Confidential / restricted":st.info("Local retrieval only. Optional Gemini synthesis is disabled for this classification.")
-    @st.cache_resource
-    def load():
-        ch=chunks_from_dir(str(ROOT/"project_2_rag"/"knowledge_base"));return LocalRetriever(ch),ch
-    retriever,chunks=load(); metric_row([("Documents",str(len(set(x['source'] for x in chunks))),None),("Evidence chunks",str(len(chunks)),None),("Mode","Gemini + retrieval" if cfg.gemini_enabled and enabled() else "Local retrieval",None)])
-    examples=["What should be checked after a torque failure?","How should nonconforming product be controlled?","When should a PFMEA be reviewed?"]
-    q=st.selectbox("Reusable question",examples+["Write my own question"],key="r_sample")
-    custom=st.text_input("Question *",value="" if q=="Write my own question" else q,key="r_query")
-    if st.button("Search approved knowledge",type="primary",use_container_width=True):
-        query,err=validate_query(custom)
-        if err:errors(err);log("validation_failed","knowledge","error")
-        else:
+    if "kb_uploaded" not in st.session_state:st.session_state.kb_uploaded=[]
+    if "kb_chat" not in st.session_state:st.session_state.kb_chat=[]
+    tabs=st.tabs(["Ask knowledge","Add documents","Knowledge-base status","Evaluation"])
+    with tabs[1]:
+        st.subheader("Add a local document")
+        uploaded=st.file_uploader("PDF, DOCX, Markdown, TXT, or CSV",type=["pdf","docx","md","txt","csv"])
+        a,b,c=st.columns(3);title=a.text_input("Document title");number=b.text_input("Document number");revision=c.text_input("Revision",value="A")
+        a,b,c=st.columns(3);plant=a.text_input("Plant",value="All");process=b.text_input("Process",value="General");doctype=c.selectbox("Document type",["Procedure","Work Instruction","PFMEA","Control Plan","Standard","Guidance","Other"])
+        a,b,c=st.columns(3);status=a.selectbox("Approval status",["Released","Draft","Obsolete"]);owner=b.text_input("Document owner");effective=c.text_input("Effective date",value="2026-08-27")
+        confidentiality=st.selectbox("Confidentiality",["Public","Internal non-sensitive","Confidential / restricted"])
+        if st.button("Add document to this session",type="primary",disabled=uploaded is None):
             try:
-                requested=query_ai
-                result=run_knowledge(query,retriever,cfg.profile,requested,generate_grounded_answer if enabled() else None)
-                st.session_state["rag_result"]=result;add_history(st.session_state,"knowledge",result,cfg.history_limit)
-                log("search_completed","knowledge",meta={"match_count":len(result["matches"]),"gemini_status":result["provenance"]["gemini_status"]})
-            except Exception as exc:st.error("Search could not be completed.");st.code(str(exc));st.info("Verify the knowledge-base files and configuration, then retry.");log("search_failed","knowledge","error",{"error_type":type(exc).__name__})
-    if "rag_result" in st.session_state:
-        r=st.session_state["rag_result"];r["data_classification"]=data_class
-        report_header("MANUFACTURING KNOWLEDGE RECORD","Search result",r.get("status","Draft"),"Knowledge user",r.get("provenance",{}).get("result_source","local"),APP_VERSION)
-        show_ai_status(r);st.subheader("Answer");st.write(r["answer"])
-        for h in r["matches"]:
-            with st.expander(f"{h['source']} · chunk {h['chunk']} · relevance {h['score']:.2f}"):st.write(h["text"])
-        useful=st.radio("Was this result useful?",["Not rated","Yes","Partly","No"],horizontal=True,key="r_feedback")
-        note=st.text_input("Feedback note",key="r_note")
-        if st.button("Save feedback"):r["feedback"]={"rating":useful,"note":note};log("feedback_saved","knowledge",meta={"rating":useful});st.success("Feedback saved in this session record.")
-        doc=knowledge_markdown(r)
-        st.markdown("### Clear documentation view")
-        st.markdown(doc)
-        download_record("Download technical data (.json)",r,"knowledge_search.json",doc,"knowledge_search_report")
+                text=extract_text(uploaded.name,uploaded.getvalue())
+                meta={"source":uploaded.name,"title":title or uploaded.name,"document_number":number or uploaded.name,"revision":revision,"plant":plant,"process":process,"document_type":doctype,"status":status,"owner":owner,"effective_date":effective,"confidentiality":confidentiality}
+                chunks=chunk_document(text,meta)
+                st.session_state.kb_uploaded.extend(chunks);log("knowledge_document_added","knowledge",meta={"source":uploaded.name,"chunks":len(chunks)});st.success(f"Added {uploaded.name} as {len(chunks)} searchable sections.")
+            except Exception as exc:st.error("The document could not be added.");st.code(str(exc))
+    base=chunks_from_dir(str(ROOT/"project_2_rag"/"knowledge_base"));chunks=base+st.session_state.kb_uploaded
+    with tabs[2]:
+        st.metric("Documents",len({x["source"] for x in chunks}));st.metric("Searchable sections",len(chunks));st.metric("Released sections",sum(x.get("status")=="Released" for x in chunks))
+        for source in sorted({x["source"] for x in chunks}):
+            sample=next(x for x in chunks if x["source"]==source)
+            with st.expander(f"{sample.get('document_number')} Rev {sample.get('revision')} — {sample.get('title')}"):
+                st.write({k:sample.get(k) for k in ("status","plant","process","document_type","owner","effective_date","confidentiality")});st.caption(f"{sum(x['source']==source for x in chunks)} searchable section(s)")
+    with tabs[3]:
+        data=json.loads((ROOT/"project_2_rag"/"evaluation"/"questions.json").read_text())
+        st.write("Frozen evaluation questions with expected sources.");st.dataframe(data,use_container_width=True)
+        if st.button("Run local retrieval evaluation"):
+            rt=HybridRetriever(chunks);correct=0;noev=0;rows=[]
+            for item in data:
+                hits=rt.search(item["question"],top_k=3,filters={"status":"Released"});sources={h["source"] for h in hits}
+                ok=(item["expected_source"] in sources) if item["expected_source"] else not hits
+                correct+=int(ok);noev+=int(not hits);rows.append({"question":item["question"],"expected":item["expected_source"] or "No evidence","retrieved":", ".join(sources) or "No evidence","pass":ok})
+            st.metric("Recall@3 / no-evidence accuracy",f"{correct/len(data):.0%}");st.dataframe(rows,use_container_width=True)
+    with tabs[0]:
+        st.subheader("Conversation")
+        with st.expander("Search scope and options",expanded=False):
+            values=lambda key:sorted({str(x.get(key,"All")) for x in chunks})
+            a,b,c=st.columns(3);plant=a.selectbox("Plant",["All"]+[x for x in values("plant") if x!="All"]);process=b.selectbox("Process",["All"]+[x for x in values("process") if x!="All"]);doctype=c.selectbox("Document type",["All"]+values("document_type"))
+            released=st.checkbox("Search released documents only",value=True);top_k=st.slider("Evidence sections",2,8,5)
+            data_class=st.selectbox("Question data classification",["Synthetic / demonstration","Public","Internal non-sensitive","Confidential / restricted"])
+            use_semantic=st.checkbox("Use optional Gemini semantic search",value=False,disabled=(not cfg.gemini_enabled or data_class=="Confidential / restricted"))
+            use_synthesis=st.checkbox("Use optional Gemini conversational synthesis",value=False,disabled=(not cfg.gemini_enabled or data_class=="Confidential / restricted"))
+        for msg in st.session_state.kb_chat:
+            with st.chat_message(msg["role"]):st.markdown(msg["content"])
+        question=st.chat_input("Ask a manufacturing knowledge question")
+        if question:
+            st.session_state.kb_chat.append({"role":"user","content":question})
+            filters={"plant":plant,"process":process,"document_type":doctype,"status":"Released" if released else "All"}
+            semantic_vectors=semantic_query=None;semantic_status="not_requested"
+            if use_semantic:
+                try:
+                    semantic_vectors=embed_texts([f"title: {x.get('title')} | text: {x['text']}" for x in chunks],task_type="RETRIEVAL_DOCUMENT")
+                    semantic_query=embed_texts([f"question answering | query: {question}"],task_type="RETRIEVAL_QUERY")[0];semantic_status="success"
+                except Exception:semantic_status="failed"
+            retriever=HybridRetriever(chunks,semantic_vectors);hits=retriever.search(question,top_k=top_k,filters=filters,semantic_query=semantic_query)
+            sufficient=evidence_sufficiency(hits);answer=local_answer(question,hits,sufficient);gemini_status="not_requested"
+            if use_synthesis and hits:
+                evidence="\n\n".join(f"[S{n}] {h.get('document_number')} Rev {h.get('revision')} | {h.get('section')} | {h['text']}" for n,h in enumerate(hits,1))
+                history="\n".join(f"{m['role']}: {m['content']}" for m in st.session_state.kb_chat[-6:])
+                try:
+                    prompt=f"Conversation:\n{history}\n\nCurrent question: {question}\n\nEvidence:\n{evidence}\n\nAnswer conversationally. Use only evidence. Cite every key claim with [S1], [S2]. Include Direct answer, Recommended checks, Evidence limitations, and Sources."
+                    answer_text=generate_grounded_answer(question,prompt);gemini_status="success"
+                except Exception:answer_text=format_answer(answer);gemini_status="failed"
+            else:answer_text=format_answer(answer)
+            notice=("Answer synthesized from retrieved local evidence with optional Gemini AI." if gemini_status=="success" else "Answer assembled from locally retrieved evidence. Gemini AI was not used." if gemini_status=="not_requested" else "Gemini synthesis was unavailable. This answer was assembled from locally retrieved evidence.")
+            content=f"**Evidence status:** {sufficient['status']}  \n**Retrieval:** Local hybrid search; semantic search {semantic_status.replace('_',' ')}  \n**Analysis source:** {notice}\n\n{answer_text}"
+            result={"question":question,"answer":answer_text,"matches":hits,"status":sufficient["status"],"evidence_sufficiency":sufficient,"provenance":{"result_source":"local_plus_gemini" if gemini_status=="success" else "local","gemini_used":gemini_status=="success","gemini_status":gemini_status,"semantic_status":semantic_status,"user_notice":notice},"filters":filters}
+            st.session_state["rag_result"]=result;st.session_state.kb_chat.append({"role":"assistant","content":content});add_history(st.session_state,"knowledge",result,cfg.history_limit);log("knowledge_conversation_answered","knowledge",meta={"matches":len(hits),"status":sufficient["status"],"gemini_status":gemini_status});st.rerun()
+        if st.session_state.kb_chat:
+            a,b=st.columns(2)
+            if a.button("Start a new conversation"):st.session_state.kb_chat=[];st.rerun()
+            with b.popover("Rate the latest answer"):
+                rating=st.radio("Was the correct evidence found?",["Yes","Partly","No"]);grounded=st.radio("Was the answer supported?",["Yes","Partly","No"],key="grounded");note=st.text_area("What was missing?")
+                if st.button("Save feedback"):log("knowledge_feedback","knowledge",meta={"evidence":rating,"supported":grounded});st.success("Feedback saved.")
+        if "rag_result" in st.session_state:
+            r=st.session_state.rag_result
+            with st.expander("Retrieved evidence and diagnostics"):
+                for n,h in enumerate(r["matches"],1):
+                    st.markdown(f"#### [S{n}] {h.get('document_number')} Rev {h.get('revision')} — {h.get('section')}")
+                    st.write(h["text"]);st.caption("Why retrieved: "+"; ".join(h["why_retrieved"]));st.json({k:h[k] for k in ("score","word_score","char_score","semantic_score")})
+            doc=knowledge_markdown(r);download_record("Download technical record (.json)",r,"knowledge_conversation.json",doc,"knowledge_conversation_report")
 
 def fault_form():
     page("Fault Triage Agent","Guided fault intake, review, routing decision, and export.","OPERATIONS")

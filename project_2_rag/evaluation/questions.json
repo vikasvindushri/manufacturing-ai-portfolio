@@ -1,0 +1,18 @@
+[
+  {
+    "question": "What should be checked after a torque failure?",
+    "expected_source": "torque_control.md"
+  },
+  {
+    "question": "How should suspect nonconforming product be controlled?",
+    "expected_source": "nonconformance.md"
+  },
+  {
+    "question": "When should a PFMEA be reviewed?",
+    "expected_source": "pfmea.md"
+  },
+  {
+    "question": "What is the cafeteria menu?",
+    "expected_source": ""
+  }
+]

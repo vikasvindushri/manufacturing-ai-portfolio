@@ -1,5 +1,26 @@
 # Release History
 
+## v0.5 — Conversational Manufacturing Knowledge Assistant
+
+**Release date:** August 27, 2026  
+**Release status:** Current  
+**Release type:** Knowledge retrieval and conversational experience
+
+### Added
+- Local PDF, DOCX, Markdown, TXT, and CSV upload
+- Document metadata and released-document filtering
+- Heading-aware overlapping chunks
+- Hybrid word, character, exact-term, and optional semantic retrieval
+- Optional Gemini embeddings and grounded conversational synthesis
+- Metadata filters, evidence-sufficiency gate, structured answers, citations, local fallback, and follow-up questions
+- Knowledge-base status, retrieval diagnostics, feedback capture, and frozen evaluation set
+- Recall@3 and no-evidence evaluation
+
+### Reliability
+The assistant remains fully usable without Gemini. Local hybrid retrieval and extractive conversational answers remain available when Gemini is disabled or unavailable.
+
+---
+
 This document is the source of truth for released product changes beginning with version 0.2.
 
 The repository README describes the current product. The [Product Roadmap](docs/PRODUCT_ROADMAP.md) describes planned capabilities, and the [Phase 1 Completion Report](docs/PHASE_1_COMPLETION.md) records the evidence used to mark Phase 1 complete.

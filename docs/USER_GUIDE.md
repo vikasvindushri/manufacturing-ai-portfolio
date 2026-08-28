@@ -30,3 +30,13 @@
 - Missing packages: `python -m pip install -r requirements.txt`.
 - Gemini 404: change `GEMINI_MODEL` to a model available to your key.
 - Gemini disabled: verify `.env`, then stop and restart Streamlit.
+
+
+## Conversational Knowledge Assistant v0.5
+
+1. Add PDF, DOCX, Markdown, TXT, or CSV documents in **Add documents**.
+2. Record document number, revision, status, owner, plant, process, and confidentiality.
+3. Keep **Released documents only** selected for controlled use.
+4. Ask a question in the chat and continue with follow-up questions.
+5. Inspect evidence status, [S1] citations, source metadata, and retrieval diagnostics.
+6. Gemini semantic search and synthesis are optional. Local hybrid retrieval remains available.

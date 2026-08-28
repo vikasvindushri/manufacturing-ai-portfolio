@@ -3,7 +3,7 @@
 > A governed, local-first product suite for quality investigations, evidence-backed manufacturing knowledge, and operational fault triage.
 
 [![CI](https://github.com/vikasvindushri/manufacturing-ai-portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/vikasvindushri/manufacturing-ai-portfolio/actions)
-![Version](https://img.shields.io/badge/version-v0.4-087F8C)
+![Version](https://img.shields.io/badge/version-v0.5-087F8C)
 ![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB)
 ![Streamlit](https://img.shields.io/badge/UI-Streamlit-FF4B4B)
 ![Gemini](https://img.shields.io/badge/AI-Gemini%20optional-4285F4)
@@ -21,7 +21,7 @@ The suite contains three guided applications:
 
 ## Delivery Status
 
-- **Current release:** v0.4
+- **Current release:** v0.5
 - **Phase 1 — Product Foundation:** Complete
 - **Phase 2 — Guided Workflow Configuration:** Planned
 - **Phase 3 — Data and Connector Studio:** Planned
@@ -29,7 +29,9 @@ The suite contains three guided applications:
 - **Phase 5 — Visual Workflow Studio:** Planned
 - **Phase 6 — Enterprise Productization:** Planned
 
-Version 0.4 completes the Phase 1 product-hardening scope with professional report presentation, record-readiness indicators, transparent local and Gemini analysis, per-case AI controls, expanded human review, data classification, and system-health visibility.
+Version 0.5 upgrades the Manufacturing Knowledge Assistant with conversational, evidence-backed retrieval with professional report presentation, record-readiness indicators, transparent local and Gemini analysis, per-case AI controls, expanded human review, data classification, and system-health visibility.
+
+- **v0.5 highlight:** upload approved documents, apply metadata filters, ask follow-up questions, inspect claim-level citations, and evaluate retrieval quality.
 
 - [View the full release history](CHANGELOG.md)
 - [Review the product roadmap](docs/PRODUCT_ROADMAP.md)
@@ -37,7 +39,7 @@ Version 0.4 completes the Phase 1 product-hardening scope with professional repo
 
 ## Product Maturity
 
-Manufacturing AI Studio v0.4 is a working Phase 1 product foundation. It provides guided workflows, local processing, optional Gemini enhancement, human review controls, readable reports, technical exports, session history, audit events, environment profiles, and automated tests.
+Manufacturing AI Studio v0.5 is a working Phase 1 product foundation. It provides guided workflows, local processing, optional Gemini enhancement, human review controls, readable reports, technical exports, session history, audit events, environment profiles, and automated tests.
 
 It is not yet an enterprise production system. Persistent multi-user storage, authentication, approved business-system connectors, centralized monitoring, and formal operational validation are planned for later phases.
 

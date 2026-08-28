@@ -27,3 +27,14 @@ def generate_grounded_answer(question,evidence):
       r=client.models.generate_content(model=model_name(),contents=prompt,config=types.GenerateContentConfig(temperature=0.1))
       return r.text
     finally: client.close()
+
+
+def embed_texts(texts, model=None, task_type="RETRIEVAL_DOCUMENT"):
+    """Generate optional Gemini embeddings; callers must retain local fallback."""
+    from google.genai import types
+    selected=model or os.getenv("GEMINI_EMBEDDING_MODEL","gemini-embedding-001")
+    client=_client()
+    try:
+        result=client.models.embed_content(model=selected,contents=texts,config=types.EmbedContentConfig(task_type=task_type))
+        return [list(x.values) for x in result.embeddings]
+    finally: client.close()
