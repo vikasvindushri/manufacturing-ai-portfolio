@@ -1,0 +1,10 @@
+Manufacturing AI Portfolio - Environment Check
+--------------------------------------------------
+PASS  Python >= 3.11: True
+PASS  Repository root: True
+PASS  .env loaded: True
+PASS  Gemini enabled: True
+PASS  Gemini key present: True
+PASS  Model configured: True
+Model: gemini-3.6-flash
+Key value is intentionally not displayed.

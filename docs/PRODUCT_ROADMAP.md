@@ -4,7 +4,12 @@
 
 Evolve Manufacturing AI Studio from three demonstration applications into a governed workflow environment in which business users can configure, run, review, and improve manufacturing AI workflows through guided interfaces rather than source-code changes.
 
-## Phase 1 — Product foundation ✅ COMPLETE — Version 0.4
+## Phase 1 — Product foundation ✅ COMPLETE — Version 0.6
+**Exit decision:** Approved on August 28, 2026
+**Baseline:** v0.6
+**Tag:** `phase-1-complete`
+**Owner:** Vikas V Indushri 
+**Exit decision:** PHASE_1_EXIT_DECISION.md
 
 **Goal:** Make the current suite reliable and easy to operate.
 

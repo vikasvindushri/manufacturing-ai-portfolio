@@ -23,7 +23,9 @@ The suite contains three guided applications:
 
 - **Current release:** v0.6
 - **Phase 1 — Product Foundation:** Complete
-- **Phase 2 — Guided Workflow Configuration:** Planned
+- **Phase 1 exit decision:** Approved
+- **Phase 1 baseline:** `phase-1-complete`
+- **Phase 2 — Guided Workflow Configuration:** Authorized to begin
 - **Phase 3 — Data and Connector Studio:** Planned
 - **Phase 4 — Governance and Evaluation Center:** Planned
 - **Phase 5 — Visual Workflow Studio:** Planned
