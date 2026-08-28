@@ -1,0 +1,2182 @@
+[
+  {
+    "knowledge_id": "Q-001",
+    "title": "8D Problem Solving",
+    "domain": "Quality",
+    "process": "All",
+    "applicable_workflows": [
+      "quality_8d",
+      "knowledge_assistant"
+    ],
+    "authority": "approved_guidance",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://www.aiag.org/expertise-areas/quality/quality-core-tools",
+      "https://www.iso.org/quality-management"
+    ],
+    "source_organizations": [
+      "AIAG",
+      "ISO"
+    ],
+    "source_file": "q-001_8d_problem_solving.md"
+  },
+  {
+    "knowledge_id": "Q-002",
+    "title": "5-Why Analysis",
+    "domain": "Quality",
+    "process": "All",
+    "applicable_workflows": [
+      "quality_8d",
+      "knowledge_assistant"
+    ],
+    "authority": "approved_guidance",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://www.aiag.org/expertise-areas/quality/quality-core-tools"
+    ],
+    "source_organizations": [
+      "AIAG"
+    ],
+    "source_file": "q-002_5_why_analysis.md"
+  },
+  {
+    "knowledge_id": "Q-003",
+    "title": "Fishbone and 6M Analysis",
+    "domain": "Quality",
+    "process": "All",
+    "applicable_workflows": [
+      "quality_8d",
+      "knowledge_assistant"
+    ],
+    "authority": "approved_guidance",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://www.aiag.org/expertise-areas/quality/quality-core-tools"
+    ],
+    "source_organizations": [
+      "AIAG"
+    ],
+    "source_file": "q-003_fishbone_and_6m_analysis.md"
+  },
+  {
+    "knowledge_id": "Q-004",
+    "title": "PFMEA Review Triggers",
+    "domain": "Quality",
+    "process": "Quality Planning",
+    "applicable_workflows": [
+      "quality_8d",
+      "knowledge_assistant"
+    ],
+    "authority": "controlled_procedure",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://www.aiag.org/expertise-areas/quality/quality-core-tools"
+    ],
+    "source_organizations": [
+      "AIAG"
+    ],
+    "source_file": "q-004_pfmea_review_triggers.md"
+  },
+  {
+    "knowledge_id": "Q-005",
+    "title": "Control Plan Reaction Plans",
+    "domain": "Quality",
+    "process": "All",
+    "applicable_workflows": [
+      "quality_8d",
+      "knowledge_assistant",
+      "fault_triage"
+    ],
+    "authority": "controlled_procedure",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://www.aiag.org/expertise-areas/quality/quality-core-tools"
+    ],
+    "source_organizations": [
+      "AIAG"
+    ],
+    "source_file": "q-005_control_plan_reaction_plans.md"
+  },
+  {
+    "knowledge_id": "Q-006",
+    "title": "PPAP Submission Readiness",
+    "domain": "Quality",
+    "process": "Supplier Quality",
+    "applicable_workflows": [
+      "quality_8d",
+      "knowledge_assistant"
+    ],
+    "authority": "approved_guidance",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://www.aiag.org/expertise-areas/quality/quality-core-tools"
+    ],
+    "source_organizations": [
+      "AIAG"
+    ],
+    "source_file": "q-006_ppap_submission_readiness.md"
+  },
+  {
+    "knowledge_id": "Q-007",
+    "title": "Measurement System Analysis",
+    "domain": "Quality",
+    "process": "Inspection",
+    "applicable_workflows": [
+      "quality_8d",
+      "knowledge_assistant"
+    ],
+    "authority": "approved_guidance",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://www.aiag.org/expertise-areas/quality/quality-core-tools"
+    ],
+    "source_organizations": [
+      "AIAG"
+    ],
+    "source_file": "q-007_measurement_system_analysis.md"
+  },
+  {
+    "knowledge_id": "Q-008",
+    "title": "Statistical Process Control",
+    "domain": "Quality",
+    "process": "All",
+    "applicable_workflows": [
+      "quality_8d",
+      "knowledge_assistant"
+    ],
+    "authority": "approved_guidance",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://www.aiag.org/expertise-areas/quality/quality-core-tools"
+    ],
+    "source_organizations": [
+      "AIAG"
+    ],
+    "source_file": "q-008_statistical_process_control.md"
+  },
+  {
+    "knowledge_id": "Q-009",
+    "title": "Nonconforming Product Control",
+    "domain": "Quality",
+    "process": "All",
+    "applicable_workflows": [
+      "quality_8d",
+      "knowledge_assistant"
+    ],
+    "authority": "controlled_procedure",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://www.iso.org/quality-management",
+      "https://www.aiag.org/expertise-areas/quality/quality-core-tools"
+    ],
+    "source_organizations": [
+      "ISO",
+      "AIAG"
+    ],
+    "source_file": "q-009_nonconforming_product_control.md"
+  },
+  {
+    "knowledge_id": "Q-010",
+    "title": "Corrective Action Effectiveness",
+    "domain": "Quality",
+    "process": "All",
+    "applicable_workflows": [
+      "quality_8d",
+      "knowledge_assistant"
+    ],
+    "authority": "controlled_procedure",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://www.iso.org/quality-management",
+      "https://www.aiag.org/expertise-areas/quality/quality-core-tools"
+    ],
+    "source_organizations": [
+      "ISO",
+      "AIAG"
+    ],
+    "source_file": "q-010_corrective_action_effectiveness.md"
+  },
+  {
+    "knowledge_id": "P-001",
+    "title": "Day Cab Final Assembly Overview",
+    "domain": "Manufacturing Process",
+    "process": "Final Assembly",
+    "applicable_workflows": [
+      "knowledge_assistant",
+      "quality_8d"
+    ],
+    "authority": "approved_guidance",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://www.nhtsa.gov/laws-regulations"
+    ],
+    "source_organizations": [
+      "NHTSA"
+    ],
+    "source_file": "p-001_day_cab_final_assembly_overview.md"
+  },
+  {
+    "knowledge_id": "P-002",
+    "title": "Sleeper Cab Final Assembly Overview",
+    "domain": "Manufacturing Process",
+    "process": "Final Assembly",
+    "applicable_workflows": [
+      "knowledge_assistant",
+      "quality_8d"
+    ],
+    "authority": "approved_guidance",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://www.nhtsa.gov/laws-regulations"
+    ],
+    "source_organizations": [
+      "NHTSA"
+    ],
+    "source_file": "p-002_sleeper_cab_final_assembly_overview.md"
+  },
+  {
+    "knowledge_id": "P-003",
+    "title": "Chassis Frame Assembly",
+    "domain": "Manufacturing Process",
+    "process": "Chassis",
+    "applicable_workflows": [
+      "quality_8d",
+      "knowledge_assistant",
+      "fault_triage"
+    ],
+    "authority": "work_instruction",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://www.iso.org/quality-management"
+    ],
+    "source_organizations": [
+      "ISO"
+    ],
+    "source_file": "p-003_chassis_frame_assembly.md"
+  },
+  {
+    "knowledge_id": "P-004",
+    "title": "Critical Fastener Torque Control",
+    "domain": "Manufacturing Process",
+    "process": "Fastening",
+    "applicable_workflows": [
+      "quality_8d",
+      "knowledge_assistant",
+      "fault_triage"
+    ],
+    "authority": "work_instruction",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://www.aiag.org/expertise-areas/quality/quality-core-tools"
+    ],
+    "source_organizations": [
+      "AIAG"
+    ],
+    "source_file": "p-004_critical_fastener_torque_control.md"
+  },
+  {
+    "knowledge_id": "P-005",
+    "title": "Cab Mount Installation",
+    "domain": "Manufacturing Process",
+    "process": "Cab Installation",
+    "applicable_workflows": [
+      "quality_8d",
+      "knowledge_assistant",
+      "fault_triage"
+    ],
+    "authority": "work_instruction",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://www.iso.org/quality-management"
+    ],
+    "source_organizations": [
+      "ISO"
+    ],
+    "source_file": "p-005_cab_mount_installation.md"
+  },
+  {
+    "knowledge_id": "P-006",
+    "title": "Fifth Wheel Installation",
+    "domain": "Manufacturing Process",
+    "process": "Chassis",
+    "applicable_workflows": [
+      "quality_8d",
+      "knowledge_assistant",
+      "fault_triage"
+    ],
+    "authority": "work_instruction",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://csa.fmcsa.dot.gov/SafetyPlanner/MyFiles/SubSections.aspx?ch=23&sec=68&sub=166&eta=70389"
+    ],
+    "source_organizations": [
+      "FMCSA"
+    ],
+    "source_file": "p-006_fifth_wheel_installation.md"
+  },
+  {
+    "knowledge_id": "P-007",
+    "title": "Air Line Routing and Leak Prevention",
+    "domain": "Manufacturing Process",
+    "process": "Pneumatics",
+    "applicable_workflows": [
+      "quality_8d",
+      "knowledge_assistant",
+      "fault_triage"
+    ],
+    "authority": "work_instruction",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://www.nhtsa.gov/sites/nhtsa.gov/files/fmvss/121_Stopping_Distance_FR_0.pdf",
+      "https://tc.canada.ca/en/road-transportation/safety-standards-vehicles-tires-child-car-seats/safety-standards-vehicles"
+    ],
+    "source_organizations": [
+      "FMVSS121",
+      "TC"
+    ],
+    "source_file": "p-007_air_line_routing_and_leak_prevention.md"
+  },
+  {
+    "knowledge_id": "P-008",
+    "title": "Electrical Harness Routing",
+    "domain": "Manufacturing Process",
+    "process": "Electrical",
+    "applicable_workflows": [
+      "quality_8d",
+      "knowledge_assistant",
+      "fault_triage"
+    ],
+    "authority": "work_instruction",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://saemobilus.sae.org/standards/j1939_202603-serial-control-communications-heavy-duty-vehicle-network-top-level-document"
+    ],
+    "source_organizations": [
+      "SAE"
+    ],
+    "source_file": "p-008_electrical_harness_routing.md"
+  },
+  {
+    "knowledge_id": "P-009",
+    "title": "Fluid Fill and Contamination Control",
+    "domain": "Manufacturing Process",
+    "process": "Fluids",
+    "applicable_workflows": [
+      "quality_8d",
+      "knowledge_assistant",
+      "fault_triage"
+    ],
+    "authority": "work_instruction",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://www.iso.org/quality-management"
+    ],
+    "source_organizations": [
+      "ISO"
+    ],
+    "source_file": "p-009_fluid_fill_and_contamination_control.md"
+  },
+  {
+    "knowledge_id": "P-010",
+    "title": "End-of-Line Functional Test",
+    "domain": "Manufacturing Process",
+    "process": "End of Line",
+    "applicable_workflows": [
+      "quality_8d",
+      "knowledge_assistant",
+      "fault_triage"
+    ],
+    "authority": "controlled_procedure",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://csa.fmcsa.dot.gov/SafetyPlanner/MyFiles/SubSections.aspx?ch=23&sec=68&sub=166&eta=70389",
+      "https://www.nhtsa.gov/laws-regulations"
+    ],
+    "source_organizations": [
+      "FMCSA",
+      "NHTSA"
+    ],
+    "source_file": "p-010_end_of_line_functional_test.md"
+  },
+  {
+    "knowledge_id": "P-011",
+    "title": "Water Leak Test for Day Cab and Sleeper",
+    "domain": "Manufacturing Process",
+    "process": "Cab Test",
+    "applicable_workflows": [
+      "quality_8d",
+      "knowledge_assistant",
+      "fault_triage"
+    ],
+    "authority": "work_instruction",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://www.iso.org/quality-management"
+    ],
+    "source_organizations": [
+      "ISO"
+    ],
+    "source_file": "p-011_water_leak_test_for_day_cab_and_sleeper.md"
+  },
+  {
+    "knowledge_id": "P-012",
+    "title": "Paint Finish and Corrosion Protection",
+    "domain": "Manufacturing Process",
+    "process": "Paint",
+    "applicable_workflows": [
+      "quality_8d",
+      "knowledge_assistant"
+    ],
+    "authority": "approved_guidance",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://www.iso.org/quality-management"
+    ],
+    "source_organizations": [
+      "ISO"
+    ],
+    "source_file": "p-012_paint_finish_and_corrosion_protection.md"
+  },
+  {
+    "knowledge_id": "P-013",
+    "title": "Wheel and Tire Installation",
+    "domain": "Manufacturing Process",
+    "process": "Wheel End",
+    "applicable_workflows": [
+      "quality_8d",
+      "knowledge_assistant",
+      "fault_triage"
+    ],
+    "authority": "work_instruction",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://csa.fmcsa.dot.gov/SafetyPlanner/MyFiles/SubSections.aspx?ch=23&sec=68&sub=166&eta=70389",
+      "https://tc.canada.ca/en/road-transportation/safety-standards-vehicles-tires-child-car-seats/safety-standards-vehicles",
+      "https://www.osha.gov/trucking-industry/standards"
+    ],
+    "source_organizations": [
+      "FMCSA",
+      "TC",
+      "OSHA"
+    ],
+    "source_file": "p-013_wheel_and_tire_installation.md"
+  },
+  {
+    "knowledge_id": "P-014",
+    "title": "Brake System Assembly Verification",
+    "domain": "Manufacturing Process",
+    "process": "Brakes",
+    "applicable_workflows": [
+      "quality_8d",
+      "knowledge_assistant",
+      "fault_triage"
+    ],
+    "authority": "controlled_procedure",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://www.nhtsa.gov/sites/nhtsa.gov/files/fmvss/121_Stopping_Distance_FR_0.pdf",
+      "https://csa.fmcsa.dot.gov/SafetyPlanner/MyFiles/SubSections.aspx?ch=23&sec=68&sub=166&eta=70389",
+      "https://tc.canada.ca/en/road-transportation/safety-standards-vehicles-tires-child-car-seats/safety-standards-vehicles"
+    ],
+    "source_organizations": [
+      "FMVSS121",
+      "FMCSA",
+      "TC"
+    ],
+    "source_file": "p-014_brake_system_assembly_verification.md"
+  },
+  {
+    "knowledge_id": "P-015",
+    "title": "Steering System Assembly Verification",
+    "domain": "Manufacturing Process",
+    "process": "Steering",
+    "applicable_workflows": [
+      "quality_8d",
+      "knowledge_assistant",
+      "fault_triage"
+    ],
+    "authority": "controlled_procedure",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://csa.fmcsa.dot.gov/SafetyPlanner/MyFiles/SubSections.aspx?ch=23&sec=68&sub=166&eta=70389"
+    ],
+    "source_organizations": [
+      "FMCSA"
+    ],
+    "source_file": "p-015_steering_system_assembly_verification.md"
+  },
+  {
+    "knowledge_id": "P-016",
+    "title": "Lighting and Reflective Equipment",
+    "domain": "Manufacturing Process",
+    "process": "Electrical",
+    "applicable_workflows": [
+      "quality_8d",
+      "knowledge_assistant",
+      "fault_triage"
+    ],
+    "authority": "controlled_procedure",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://www.nhtsa.gov/laws-regulations",
+      "https://tc.canada.ca/en/road-transportation/safety-standards-vehicles-tires-child-car-seats/safety-standards-vehicles",
+      "https://csa.fmcsa.dot.gov/SafetyPlanner/MyFiles/SubSections.aspx?ch=23&sec=68&sub=166&eta=70389"
+    ],
+    "source_organizations": [
+      "NHTSA",
+      "TC",
+      "FMCSA"
+    ],
+    "source_file": "p-016_lighting_and_reflective_equipment.md"
+  },
+  {
+    "knowledge_id": "P-017",
+    "title": "Vehicle Configuration and Build Record",
+    "domain": "Manufacturing Process",
+    "process": "All",
+    "applicable_workflows": [
+      "quality_8d",
+      "knowledge_assistant"
+    ],
+    "authority": "controlled_procedure",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://www.nhtsa.gov/laws-regulations",
+      "https://tc.canada.ca/en/road-transportation/safety-standards-vehicles-tires-child-car-seats/safety-standards-vehicles"
+    ],
+    "source_organizations": [
+      "NHTSA",
+      "TC"
+    ],
+    "source_file": "p-017_vehicle_configuration_and_build_record.md"
+  },
+  {
+    "knowledge_id": "P-018",
+    "title": "Layered Process Audit",
+    "domain": "Manufacturing Process",
+    "process": "All",
+    "applicable_workflows": [
+      "quality_8d",
+      "knowledge_assistant"
+    ],
+    "authority": "approved_guidance",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://www.iso.org/quality-management"
+    ],
+    "source_organizations": [
+      "ISO"
+    ],
+    "source_file": "p-018_layered_process_audit.md"
+  },
+  {
+    "knowledge_id": "M-001",
+    "title": "Preventive Maintenance Planning",
+    "domain": "Maintenance",
+    "process": "Maintenance",
+    "applicable_workflows": [
+      "knowledge_assistant",
+      "fault_triage"
+    ],
+    "authority": "approved_guidance",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://www.iso.org/quality-management"
+    ],
+    "source_organizations": [
+      "ISO"
+    ],
+    "source_file": "m-001_preventive_maintenance_planning.md"
+  },
+  {
+    "knowledge_id": "M-002",
+    "title": "Hydraulic Pressure Instability",
+    "domain": "Maintenance",
+    "process": "Hydraulics",
+    "applicable_workflows": [
+      "fault_triage",
+      "knowledge_assistant"
+    ],
+    "authority": "diagnostic_guide",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://www.osha.gov/trucking-industry/standards"
+    ],
+    "source_organizations": [
+      "OSHA"
+    ],
+    "source_file": "m-002_hydraulic_pressure_instability.md"
+  },
+  {
+    "knowledge_id": "M-003",
+    "title": "Pneumatic Leak Diagnosis",
+    "domain": "Maintenance",
+    "process": "Pneumatics",
+    "applicable_workflows": [
+      "fault_triage",
+      "knowledge_assistant"
+    ],
+    "authority": "diagnostic_guide",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://www.osha.gov/trucking-industry/standards"
+    ],
+    "source_organizations": [
+      "OSHA"
+    ],
+    "source_file": "m-003_pneumatic_leak_diagnosis.md"
+  },
+  {
+    "knowledge_id": "M-004",
+    "title": "Bearing Noise and Vibration",
+    "domain": "Maintenance",
+    "process": "Rotating Equipment",
+    "applicable_workflows": [
+      "fault_triage",
+      "knowledge_assistant"
+    ],
+    "authority": "diagnostic_guide",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://www.cdc.gov/niosh/ergonomics/about/index.html"
+    ],
+    "source_organizations": [
+      "NIOSH"
+    ],
+    "source_file": "m-004_bearing_noise_and_vibration.md"
+  },
+  {
+    "knowledge_id": "M-005",
+    "title": "Conveyor Stop and Jam Response",
+    "domain": "Maintenance",
+    "process": "Material Handling",
+    "applicable_workflows": [
+      "fault_triage",
+      "knowledge_assistant"
+    ],
+    "authority": "diagnostic_guide",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://www.osha.gov/trucking-industry/standards"
+    ],
+    "source_organizations": [
+      "OSHA"
+    ],
+    "source_file": "m-005_conveyor_stop_and_jam_response.md"
+  },
+  {
+    "knowledge_id": "M-006",
+    "title": "DC Fastening Tool Faults",
+    "domain": "Maintenance",
+    "process": "Fastening",
+    "applicable_workflows": [
+      "fault_triage",
+      "knowledge_assistant",
+      "quality_8d"
+    ],
+    "authority": "diagnostic_guide",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://www.aiag.org/expertise-areas/quality/quality-core-tools"
+    ],
+    "source_organizations": [
+      "AIAG"
+    ],
+    "source_file": "m-006_dc_fastening_tool_faults.md"
+  },
+  {
+    "knowledge_id": "M-007",
+    "title": "Robot Cell Fault Response",
+    "domain": "Maintenance",
+    "process": "Automation",
+    "applicable_workflows": [
+      "fault_triage",
+      "knowledge_assistant"
+    ],
+    "authority": "diagnostic_guide",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://www.osha.gov/trucking-industry/standards",
+      "https://www.cdc.gov/niosh/ergonomics/about/index.html"
+    ],
+    "source_organizations": [
+      "OSHA",
+      "NIOSH"
+    ],
+    "source_file": "m-007_robot_cell_fault_response.md"
+  },
+  {
+    "knowledge_id": "M-008",
+    "title": "Paint Booth Environmental Fault",
+    "domain": "Maintenance",
+    "process": "Paint",
+    "applicable_workflows": [
+      "fault_triage",
+      "knowledge_assistant"
+    ],
+    "authority": "diagnostic_guide",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://www.osha.gov/trucking-industry/standards"
+    ],
+    "source_organizations": [
+      "OSHA"
+    ],
+    "source_file": "m-008_paint_booth_environmental_fault.md"
+  },
+  {
+    "knowledge_id": "M-009",
+    "title": "End-of-Line Diagnostic Communication Fault",
+    "domain": "Maintenance",
+    "process": "End of Line",
+    "applicable_workflows": [
+      "fault_triage",
+      "knowledge_assistant"
+    ],
+    "authority": "diagnostic_guide",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://saemobilus.sae.org/standards/j1939_202603-serial-control-communications-heavy-duty-vehicle-network-top-level-document"
+    ],
+    "source_organizations": [
+      "SAE"
+    ],
+    "source_file": "m-009_end_of_line_diagnostic_communication_fault.md"
+  },
+  {
+    "knowledge_id": "M-010",
+    "title": "Calibration Management",
+    "domain": "Maintenance",
+    "process": "Calibration",
+    "applicable_workflows": [
+      "quality_8d",
+      "knowledge_assistant",
+      "fault_triage"
+    ],
+    "authority": "controlled_procedure",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://www.aiag.org/expertise-areas/quality/quality-core-tools",
+      "https://www.iso.org/quality-management"
+    ],
+    "source_organizations": [
+      "AIAG",
+      "ISO"
+    ],
+    "source_file": "m-010_calibration_management.md"
+  },
+  {
+    "knowledge_id": "S-001",
+    "title": "Lockout Tagout",
+    "domain": "Safety",
+    "process": "All",
+    "applicable_workflows": [
+      "fault_triage",
+      "knowledge_assistant"
+    ],
+    "authority": "safety_requirement",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://www.osha.gov/trucking-industry/standards"
+    ],
+    "source_organizations": [
+      "OSHA"
+    ],
+    "source_file": "s-001_lockout_tagout.md"
+  },
+  {
+    "knowledge_id": "S-002",
+    "title": "Powered Industrial Truck Safety",
+    "domain": "Safety",
+    "process": "Material Handling",
+    "applicable_workflows": [
+      "fault_triage",
+      "knowledge_assistant"
+    ],
+    "authority": "safety_requirement",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://www.osha.gov/trucking-industry/standards"
+    ],
+    "source_organizations": [
+      "OSHA"
+    ],
+    "source_file": "s-002_powered_industrial_truck_safety.md"
+  },
+  {
+    "knowledge_id": "S-003",
+    "title": "Ergonomic Risk Control",
+    "domain": "Safety",
+    "process": "All",
+    "applicable_workflows": [
+      "quality_8d",
+      "knowledge_assistant",
+      "fault_triage"
+    ],
+    "authority": "approved_guidance",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://www.cdc.gov/niosh/ergonomics/about/index.html"
+    ],
+    "source_organizations": [
+      "NIOSH"
+    ],
+    "source_file": "s-003_ergonomic_risk_control.md"
+  },
+  {
+    "knowledge_id": "S-004",
+    "title": "High-Voltage Vehicle Safety",
+    "domain": "Safety",
+    "process": "Electric Vehicle",
+    "applicable_workflows": [
+      "fault_triage",
+      "knowledge_assistant"
+    ],
+    "authority": "safety_requirement",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://afdc.energy.gov/files/u/publication/electric_medium_and_heavy_duty_vehicle_charging_infrastructure_attributes_and_development.pdf",
+      "https://www.osha.gov/trucking-industry/standards"
+    ],
+    "source_organizations": [
+      "NREL",
+      "OSHA"
+    ],
+    "source_file": "s-004_high_voltage_vehicle_safety.md"
+  },
+  {
+    "knowledge_id": "S-005",
+    "title": "Battery Thermal Event Response",
+    "domain": "Safety",
+    "process": "Electric Vehicle",
+    "applicable_workflows": [
+      "fault_triage",
+      "knowledge_assistant"
+    ],
+    "authority": "safety_requirement",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://afdc.energy.gov/files/u/publication/electric_medium_and_heavy_duty_vehicle_charging_infrastructure_attributes_and_development.pdf"
+    ],
+    "source_organizations": [
+      "NREL"
+    ],
+    "source_file": "s-005_battery_thermal_event_response.md"
+  },
+  {
+    "knowledge_id": "S-006",
+    "title": "Machine Guarding and Interlocks",
+    "domain": "Safety",
+    "process": "Automation",
+    "applicable_workflows": [
+      "fault_triage",
+      "knowledge_assistant"
+    ],
+    "authority": "safety_requirement",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://www.osha.gov/trucking-industry/standards"
+    ],
+    "source_organizations": [
+      "OSHA"
+    ],
+    "source_file": "s-006_machine_guarding_and_interlocks.md"
+  },
+  {
+    "knowledge_id": "S-007",
+    "title": "Chemical Handling and PPE",
+    "domain": "Safety",
+    "process": "Paint",
+    "applicable_workflows": [
+      "fault_triage",
+      "knowledge_assistant"
+    ],
+    "authority": "safety_requirement",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://www.osha.gov/trucking-industry/standards"
+    ],
+    "source_organizations": [
+      "OSHA"
+    ],
+    "source_file": "s-007_chemical_handling_and_ppe.md"
+  },
+  {
+    "knowledge_id": "S-008",
+    "title": "Walking Working Surfaces",
+    "domain": "Safety",
+    "process": "All",
+    "applicable_workflows": [
+      "fault_triage",
+      "knowledge_assistant"
+    ],
+    "authority": "safety_requirement",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://www.osha.gov/trucking-industry/standards"
+    ],
+    "source_organizations": [
+      "OSHA"
+    ],
+    "source_file": "s-008_walking_working_surfaces.md"
+  },
+  {
+    "knowledge_id": "R-001",
+    "title": "United States Vehicle Safety Certification",
+    "domain": "Regulatory",
+    "process": "Certification",
+    "applicable_workflows": [
+      "quality_8d",
+      "knowledge_assistant"
+    ],
+    "authority": "regulatory_reference",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://www.nhtsa.gov/laws-regulations"
+    ],
+    "source_organizations": [
+      "NHTSA"
+    ],
+    "source_file": "r-001_united_states_vehicle_safety_certification.md"
+  },
+  {
+    "knowledge_id": "R-002",
+    "title": "Canada Vehicle Safety Certification",
+    "domain": "Regulatory",
+    "process": "Certification",
+    "applicable_workflows": [
+      "quality_8d",
+      "knowledge_assistant"
+    ],
+    "authority": "regulatory_reference",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://tc.canada.ca/en/road-transportation/safety-standards-vehicles-tires-child-car-seats/safety-standards-vehicles"
+    ],
+    "source_organizations": [
+      "TC"
+    ],
+    "source_file": "r-002_canada_vehicle_safety_certification.md"
+  },
+  {
+    "knowledge_id": "R-003",
+    "title": "Air Brake System Compliance",
+    "domain": "Regulatory",
+    "process": "Brakes",
+    "applicable_workflows": [
+      "quality_8d",
+      "knowledge_assistant"
+    ],
+    "authority": "regulatory_reference",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://www.nhtsa.gov/sites/nhtsa.gov/files/fmvss/121_Stopping_Distance_FR_0.pdf",
+      "https://tc.canada.ca/en/road-transportation/safety-standards-vehicles-tires-child-car-seats/safety-standards-vehicles"
+    ],
+    "source_organizations": [
+      "FMVSS121",
+      "TC"
+    ],
+    "source_file": "r-003_air_brake_system_compliance.md"
+  },
+  {
+    "knowledge_id": "R-004",
+    "title": "Electronic Stability Control",
+    "domain": "Regulatory",
+    "process": "Vehicle Dynamics",
+    "applicable_workflows": [
+      "quality_8d",
+      "knowledge_assistant"
+    ],
+    "authority": "regulatory_reference",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://www.nhtsa.gov/sites/nhtsa.gov/files/fmvss/136_ESC_Hvy_Veh_PRIA.pdf",
+      "https://tc.canada.ca/en/road-transportation/safety-standards-vehicles-tires-child-car-seats/safety-standards-vehicles"
+    ],
+    "source_organizations": [
+      "FMVSS136",
+      "TC"
+    ],
+    "source_file": "r-004_electronic_stability_control.md"
+  },
+  {
+    "knowledge_id": "R-005",
+    "title": "Heavy-Duty Greenhouse Gas Requirements",
+    "domain": "Regulatory",
+    "process": "Powertrain",
+    "applicable_workflows": [
+      "quality_8d",
+      "knowledge_assistant"
+    ],
+    "authority": "regulatory_reference",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://www.epa.gov/regulations-emissions-vehicles-and-engines/final-rule-greenhouse-gas-emissions-standards-heavy-duty"
+    ],
+    "source_organizations": [
+      "EPA"
+    ],
+    "source_file": "r-005_heavy_duty_greenhouse_gas_requirements.md"
+  },
+  {
+    "knowledge_id": "R-006",
+    "title": "Pre-Trip Safety Equipment Expectations",
+    "domain": "Regulatory",
+    "process": "Vehicle Release",
+    "applicable_workflows": [
+      "knowledge_assistant",
+      "quality_8d"
+    ],
+    "authority": "regulatory_reference",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://csa.fmcsa.dot.gov/SafetyPlanner/MyFiles/SubSections.aspx?ch=23&sec=68&sub=166&eta=70389"
+    ],
+    "source_organizations": [
+      "FMCSA"
+    ],
+    "source_file": "r-006_pre_trip_safety_equipment_expectations.md"
+  },
+  {
+    "knowledge_id": "R-007",
+    "title": "J1939 Network Architecture",
+    "domain": "Regulatory",
+    "process": "Electrical",
+    "applicable_workflows": [
+      "quality_8d",
+      "knowledge_assistant",
+      "fault_triage"
+    ],
+    "authority": "technical_standard_reference",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://saemobilus.sae.org/standards/j1939_202603-serial-control-communications-heavy-duty-vehicle-network-top-level-document"
+    ],
+    "source_organizations": [
+      "SAE"
+    ],
+    "source_file": "r-007_j1939_network_architecture.md"
+  },
+  {
+    "knowledge_id": "E-001",
+    "title": "Diesel Powertrain Build Verification",
+    "domain": "Product Engineering",
+    "process": "Powertrain",
+    "applicable_workflows": [
+      "quality_8d",
+      "knowledge_assistant",
+      "fault_triage"
+    ],
+    "authority": "approved_guidance",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://www.epa.gov/regulations-emissions-vehicles-and-engines/final-rule-greenhouse-gas-emissions-standards-heavy-duty"
+    ],
+    "source_organizations": [
+      "EPA"
+    ],
+    "source_file": "e-001_diesel_powertrain_build_verification.md"
+  },
+  {
+    "knowledge_id": "E-002",
+    "title": "Battery Electric Truck System Integration",
+    "domain": "Product Engineering",
+    "process": "Electric Vehicle",
+    "applicable_workflows": [
+      "quality_8d",
+      "knowledge_assistant",
+      "fault_triage"
+    ],
+    "authority": "approved_guidance",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://afdc.energy.gov/files/u/publication/electric_medium_and_heavy_duty_vehicle_charging_infrastructure_attributes_and_development.pdf",
+      "https://www.epa.gov/regulations-emissions-vehicles-and-engines/final-rule-greenhouse-gas-emissions-standards-heavy-duty"
+    ],
+    "source_organizations": [
+      "NREL",
+      "EPA"
+    ],
+    "source_file": "e-002_battery_electric_truck_system_integration.md"
+  },
+  {
+    "knowledge_id": "E-003",
+    "title": "Charging System Integration",
+    "domain": "Product Engineering",
+    "process": "Electric Vehicle",
+    "applicable_workflows": [
+      "quality_8d",
+      "knowledge_assistant",
+      "fault_triage"
+    ],
+    "authority": "approved_guidance",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://afdc.energy.gov/files/u/publication/electric_medium_and_heavy_duty_vehicle_charging_infrastructure_attributes_and_development.pdf"
+    ],
+    "source_organizations": [
+      "NREL"
+    ],
+    "source_file": "e-003_charging_system_integration.md"
+  },
+  {
+    "knowledge_id": "E-004",
+    "title": "Aerodynamic Feature Verification",
+    "domain": "Product Engineering",
+    "process": "Final Assembly",
+    "applicable_workflows": [
+      "quality_8d",
+      "knowledge_assistant"
+    ],
+    "authority": "approved_guidance",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://www.epa.gov/regulations-emissions-vehicles-and-engines/final-rule-greenhouse-gas-emissions-standards-heavy-duty"
+    ],
+    "source_organizations": [
+      "EPA"
+    ],
+    "source_file": "e-004_aerodynamic_feature_verification.md"
+  },
+  {
+    "knowledge_id": "E-005",
+    "title": "Cab HVAC Performance",
+    "domain": "Product Engineering",
+    "process": "Cab Test",
+    "applicable_workflows": [
+      "quality_8d",
+      "knowledge_assistant",
+      "fault_triage"
+    ],
+    "authority": "approved_guidance",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://csa.fmcsa.dot.gov/SafetyPlanner/MyFiles/SubSections.aspx?ch=23&sec=68&sub=166&eta=70389"
+    ],
+    "source_organizations": [
+      "FMCSA"
+    ],
+    "source_file": "e-005_cab_hvac_performance.md"
+  },
+  {
+    "knowledge_id": "E-006",
+    "title": "Driver Visibility and Mirrors",
+    "domain": "Product Engineering",
+    "process": "Cab Test",
+    "applicable_workflows": [
+      "quality_8d",
+      "knowledge_assistant"
+    ],
+    "authority": "approved_guidance",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://csa.fmcsa.dot.gov/SafetyPlanner/MyFiles/SubSections.aspx?ch=23&sec=68&sub=166&eta=70389",
+      "https://www.nhtsa.gov/laws-regulations"
+    ],
+    "source_organizations": [
+      "FMCSA",
+      "NHTSA"
+    ],
+    "source_file": "e-006_driver_visibility_and_mirrors.md"
+  },
+  {
+    "knowledge_id": "E-007",
+    "title": "Day Cab and Sleeper Variant Control",
+    "domain": "Product Engineering",
+    "process": "Configuration",
+    "applicable_workflows": [
+      "quality_8d",
+      "knowledge_assistant"
+    ],
+    "authority": "controlled_procedure",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://www.nhtsa.gov/laws-regulations",
+      "https://www.epa.gov/regulations-emissions-vehicles-and-engines/final-rule-greenhouse-gas-emissions-standards-heavy-duty"
+    ],
+    "source_organizations": [
+      "NHTSA",
+      "EPA"
+    ],
+    "source_file": "e-007_day_cab_and_sleeper_variant_control.md"
+  },
+  {
+    "knowledge_id": "E-008",
+    "title": "Software and Calibration Release Control",
+    "domain": "Product Engineering",
+    "process": "Electrical",
+    "applicable_workflows": [
+      "quality_8d",
+      "knowledge_assistant",
+      "fault_triage"
+    ],
+    "authority": "controlled_procedure",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://saemobilus.sae.org/standards/j1939_202603-serial-control-communications-heavy-duty-vehicle-network-top-level-document",
+      "https://www.nist.gov/publications/cybersecurity-framework-manufacturing-profile-0"
+    ],
+    "source_organizations": [
+      "SAE",
+      "NIST"
+    ],
+    "source_file": "e-008_software_and_calibration_release_control.md"
+  },
+  {
+    "knowledge_id": "D-001",
+    "title": "Manufacturing Cybersecurity",
+    "domain": "Digital Manufacturing",
+    "process": "Automation",
+    "applicable_workflows": [
+      "knowledge_assistant",
+      "fault_triage"
+    ],
+    "authority": "approved_guidance",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://www.nist.gov/publications/cybersecurity-framework-manufacturing-profile-0"
+    ],
+    "source_organizations": [
+      "NIST"
+    ],
+    "source_file": "d-001_manufacturing_cybersecurity.md"
+  },
+  {
+    "knowledge_id": "D-002",
+    "title": "Production Data Traceability",
+    "domain": "Digital Manufacturing",
+    "process": "All",
+    "applicable_workflows": [
+      "quality_8d",
+      "knowledge_assistant"
+    ],
+    "authority": "approved_guidance",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://www.iso.org/quality-management",
+      "https://www.nist.gov/publications/cybersecurity-framework-manufacturing-profile-0"
+    ],
+    "source_organizations": [
+      "ISO",
+      "NIST"
+    ],
+    "source_file": "d-002_production_data_traceability.md"
+  },
+  {
+    "knowledge_id": "D-003",
+    "title": "AI Output Governance",
+    "domain": "Digital Manufacturing",
+    "process": "All",
+    "applicable_workflows": [
+      "quality_8d",
+      "knowledge_assistant",
+      "fault_triage"
+    ],
+    "authority": "controlled_procedure",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://www.nist.gov/publications/cybersecurity-framework-manufacturing-profile-0",
+      "https://www.iso.org/quality-management"
+    ],
+    "source_organizations": [
+      "NIST",
+      "ISO"
+    ],
+    "source_file": "d-003_ai_output_governance.md"
+  },
+  {
+    "knowledge_id": "D-004",
+    "title": "J1939 Diagnostic Trouble Code Triage",
+    "domain": "Digital Manufacturing",
+    "process": "Electrical",
+    "applicable_workflows": [
+      "fault_triage",
+      "knowledge_assistant"
+    ],
+    "authority": "diagnostic_guide",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://saemobilus.sae.org/standards/j1939_202603-serial-control-communications-heavy-duty-vehicle-network-top-level-document"
+    ],
+    "source_organizations": [
+      "SAE"
+    ],
+    "source_file": "d-004_j1939_diagnostic_trouble_code_triage.md"
+  },
+  {
+    "knowledge_id": "L-001",
+    "title": "Supplier Quality Escalation",
+    "domain": "Supply Chain",
+    "process": "Supplier Quality",
+    "applicable_workflows": [
+      "quality_8d",
+      "knowledge_assistant"
+    ],
+    "authority": "controlled_procedure",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://www.aiag.org/expertise-areas/quality/quality-core-tools"
+    ],
+    "source_organizations": [
+      "AIAG"
+    ],
+    "source_file": "l-001_supplier_quality_escalation.md"
+  },
+  {
+    "knowledge_id": "L-002",
+    "title": "Incoming Material Verification",
+    "domain": "Supply Chain",
+    "process": "Receiving",
+    "applicable_workflows": [
+      "quality_8d",
+      "knowledge_assistant"
+    ],
+    "authority": "work_instruction",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://www.iso.org/quality-management"
+    ],
+    "source_organizations": [
+      "ISO"
+    ],
+    "source_file": "l-002_incoming_material_verification.md"
+  },
+  {
+    "knowledge_id": "L-003",
+    "title": "Engineering Change Implementation",
+    "domain": "Product Engineering",
+    "process": "Change Management",
+    "applicable_workflows": [
+      "quality_8d",
+      "knowledge_assistant"
+    ],
+    "authority": "controlled_procedure",
+    "knowledge_type": "knowledge_card",
+    "status": "Released",
+    "revision": "A",
+    "effective_date": "2026-08-27",
+    "owner": "Truck-X Manufacturing Knowledge Council",
+    "plant": [
+      "Truck-X North America"
+    ],
+    "product_family": [
+      "Day Cab",
+      "Sleeper"
+    ],
+    "confidentiality": "Synthetic public demonstration",
+    "source_urls": [
+      "https://www.aiag.org/expertise-areas/quality/quality-core-tools",
+      "https://www.iso.org/quality-management"
+    ],
+    "source_organizations": [
+      "AIAG",
+      "ISO"
+    ],
+    "source_file": "l-003_engineering_change_implementation.md"
+  }
+]

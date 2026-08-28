@@ -1,5 +1,24 @@
 # Release History
 
+## v0.6 — Shared Truck-X Manufacturing Knowledge Hub
+
+**Release date:** August 27, 2026  
+**Release status:** Current  
+**Release type:** Shared knowledge platform
+
+### Added
+- Shared synthetic Truck-X knowledge catalog with more than 50 released topics
+- Domains for quality, manufacturing process, maintenance, safety, regulatory, engineering, digital manufacturing, and supply chain
+- Day-cab and sleeper-truck applicability
+- Common metadata, authority class, workflow applicability, public reference starting points, and revision status
+- Shared retrieval integration with Quality & 8D, Knowledge Assistant, and Fault Triage
+- Knowledge Hub catalog page and cross-workflow references in exported records
+
+### Safety and legal boundary
+The library summarizes public concepts and synthetic Truck-X assumptions. It is not a substitute for current regulations, licensed standards, approved drawings, or site procedures.
+
+---
+
 ## v0.5 — Conversational Manufacturing Knowledge Assistant
 
 **Release date:** August 27, 2026  

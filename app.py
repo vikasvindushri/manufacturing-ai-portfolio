@@ -20,8 +20,9 @@ from services.workflows import run_quality,run_knowledge,run_fault
 from shared.readiness import quality_readiness,fault_readiness
 from shared.presentation import source_banner,readiness_panel,analysis_sections,report_header
 from shared.health import system_health
+from knowledge_hub.service import load_chunks as hub_chunks, references_for_quality, references_for_fault, stats as hub_stats, catalog as hub_catalog
 ROOT=Path(__file__).resolve().parent
-APP_VERSION="0.5"
+APP_VERSION="0.6"
 st.set_page_config(page_title="Manufacturing AI Studio",page_icon="🏭",layout="wide",initial_sidebar_state="expanded")
 try: cfg=load_config()
 except ValueError as exc: st.error(str(exc));st.stop()
@@ -84,6 +85,11 @@ def quality_form():
         facts=[f"{k.replace('_',' ').title()}: {v}" for k,v in src.items() if k not in ("missing_fields",) and v not in (None,"","UNKNOWN")]
         recs=[a.get("action","") for a in r.get("D5_actions",[]) if a.get("action")]
         analysis_sections(facts,ready["missing"],r.get("D4_root_cause_hypotheses",[]),recs)
+        refs=references_for_quality(src)
+        with st.expander("Applicable Truck-X knowledge",expanded=True):
+            st.caption("Retrieved from the shared released knowledge hub. These references guide investigation; they do not prove root cause.")
+            for n,h in enumerate(refs,1):st.markdown(f"**[K{n}] {h.get('document_number')} — {h.get('title')}**  \n{h.get('section')} · {h.get('authority')} · relevance {h.get('score')}")
+        r["knowledge_references"]=[{k:h.get(k) for k in ("document_number","title","revision","section","authority","source_urls")} for h in refs]
         tabs=st.tabs(["Review and edit","AI comparison","Approval and export"])
         with tabs[0]:
             r["D2_problem"]=st.text_area("Problem statement",r["D2_problem"]);r["D3_containment"]=st.text_area("Containment actions (one per line)","\n".join(r["D3_containment"])).splitlines();st.caption("Edits are included in the exported record.")
@@ -124,7 +130,7 @@ def rag_app():
                 chunks=chunk_document(text,meta)
                 st.session_state.kb_uploaded.extend(chunks);log("knowledge_document_added","knowledge",meta={"source":uploaded.name,"chunks":len(chunks)});st.success(f"Added {uploaded.name} as {len(chunks)} searchable sections.")
             except Exception as exc:st.error("The document could not be added.");st.code(str(exc))
-    base=chunks_from_dir(str(ROOT/"project_2_rag"/"knowledge_base"));chunks=base+st.session_state.kb_uploaded
+    base=hub_chunks("knowledge_assistant");chunks=base+st.session_state.kb_uploaded
     with tabs[2]:
         st.metric("Documents",len({x["source"] for x in chunks}));st.metric("Searchable sections",len(chunks));st.metric("Released sections",sum(x.get("status")=="Released" for x in chunks))
         for source in sorted({x["source"] for x in chunks}):
@@ -256,6 +262,18 @@ def history_page():
             download_record("Download technical data (.json)",record,f"{item['product']}_{n}.json",doc,f"{item['product']}_{n}_report" if doc else None)
     if st.button("Clear session history"):st.session_state["history"]=[];log("history_cleared","system");st.rerun()
 
+def knowledge_hub_page():
+    page("Truck-X Manufacturing Knowledge Hub","One governed synthetic knowledge layer for all Phase 1 workflows.","KNOWLEDGE HUB")
+    st.warning("Synthetic demonstration content only. Verify current regulations, licensed standards, drawings, and approved site procedures before operational use.")
+    summary=hub_stats();a,b,c,d=st.columns(4);a.metric("Released topics",summary["released"]);b.metric("Domains",summary["domains"]);c.metric("Quality topics",summary["workflows"]["quality_8d"]);d.metric("Fault topics",summary["workflows"]["fault_triage"])
+    data=hub_catalog();domain=st.selectbox("Domain",["All"]+sorted({x["domain"] for x in data}));workflow=st.selectbox("Applicable workflow",["All","quality_8d","knowledge_assistant","fault_triage"]);query=st.text_input("Filter title or process")
+    rows=[x for x in data if (domain=="All" or x["domain"]==domain) and (workflow=="All" or workflow in x["applicable_workflows"]) and (not query or query.lower() in (x["title"]+" "+x["process"]).lower())]
+    st.dataframe([{k:x[k] for k in ("knowledge_id","title","domain","process","authority","status","revision")} for x in rows],use_container_width=True,hide_index=True)
+    for x in rows[:20]:
+        with st.expander(f"{x['knowledge_id']} — {x['title']}"):
+            st.write("**Applicable workflows:** "+", ".join(x["applicable_workflows"]));st.write("**Product families:** "+", ".join(x["product_family"]));st.write("**Public reference starting points:**");
+            for url in x["source_urls"]:st.write(url)
+
 def health_page():
     page("System Health","Current availability of core local services and optional integrations.","SYSTEM")
     st.info("Core local workflows remain available even when Gemini is disabled or unavailable.")
@@ -277,7 +295,7 @@ def about():
 with st.sidebar:
     st.title("Manufacturing AI Studio")
     st.caption(f"Version {APP_VERSION}")
-    nav=st.radio("Navigation",["Home","Quality & 8D","Knowledge Assistant","Fault Triage","Session History","System Health"],label_visibility="collapsed")
+    nav=st.radio("Navigation",["Home","Quality & 8D","Knowledge Assistant","Fault Triage","Knowledge Hub","Session History","System Health"],label_visibility="collapsed")
     st.divider();st.caption(f"Profile: {cfg.profile}");st.caption(f"Gemini: {'enabled' if cfg.gemini_enabled and enabled() else 'local mode'}")
     if st.session_state.get("last_audit"):st.caption(f"Last event: {st.session_state['last_audit']['event_type']}")
-{"Home":about,"Quality & 8D":quality_form,"Knowledge Assistant":rag_app,"Fault Triage":fault_form,"Session History":history_page,"System Health":health_page}[nav]()
+{"Home":about,"Quality & 8D":quality_form,"Knowledge Assistant":rag_app,"Fault Triage":fault_form,"Knowledge Hub":knowledge_hub_page,"Session History":history_page,"System Health":health_page}[nav]()

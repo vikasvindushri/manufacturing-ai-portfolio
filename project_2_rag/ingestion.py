@@ -56,7 +56,7 @@ def builtin_documents(directory):
     defaults={"torque_control.md":{"title":"Torque Control Guidance","document_number":"WI-FAST-014","revision":"C","plant":"All","process":"Fastening","document_type":"Work Instruction","status":"Released"},
               "nonconformance.md":{"title":"Nonconforming Product Control","document_number":"QP-NCR-002","revision":"B","plant":"All","process":"Quality","document_type":"Procedure","status":"Released"},
               "pfmea.md":{"title":"PFMEA Review Guidance","document_number":"QP-PFMEA-001","revision":"A","plant":"All","process":"Quality Planning","document_type":"Procedure","status":"Released"}}
-    for p in sorted(Path(directory).glob("*.md")):
+    for p in sorted(Path(directory).rglob("*.md")):
         meta={"source":p.name,"effective_date":"2026-01-01","owner":"Quality Systems","confidentiality":"Internal non-sensitive",**defaults.get(p.name,{"title":p.stem.replace('_',' ').title(),"document_number":p.stem.upper(),"revision":"A","plant":"All","process":"General","document_type":"Guidance","status":"Released"})}
         docs.extend(chunk_document(p.read_text(encoding="utf-8"),meta))
     return docs

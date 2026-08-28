@@ -1,0 +1,62 @@
+[
+  {
+    "question": "What does Truck-X guidance say about 8d problem solving?",
+    "workflow": "quality_8d",
+    "expected_source": "q-001_8d_problem_solving.md"
+  },
+  {
+    "question": "What does Truck-X guidance say about pfmea review triggers?",
+    "workflow": "quality_8d",
+    "expected_source": "q-004_pfmea_review_triggers.md"
+  },
+  {
+    "question": "What does Truck-X guidance say about nonconforming product control?",
+    "workflow": "quality_8d",
+    "expected_source": "q-009_nonconforming_product_control.md"
+  },
+  {
+    "question": "What does Truck-X guidance say about critical fastener torque control?",
+    "workflow": "quality_8d",
+    "expected_source": "p-004_critical_fastener_torque_control.md"
+  },
+  {
+    "question": "What does Truck-X guidance say about paint finish and corrosion protection?",
+    "workflow": "quality_8d",
+    "expected_source": "p-012_paint_finish_and_corrosion_protection.md"
+  },
+  {
+    "question": "What does Truck-X guidance say about preventive maintenance planning?",
+    "workflow": "knowledge_assistant",
+    "expected_source": "m-001_preventive_maintenance_planning.md"
+  },
+  {
+    "question": "What does Truck-X guidance say about dc fastening tool faults?",
+    "workflow": "fault_triage",
+    "expected_source": "m-006_dc_fastening_tool_faults.md"
+  },
+  {
+    "question": "What does Truck-X guidance say about calibration management?",
+    "workflow": "quality_8d",
+    "expected_source": "m-010_calibration_management.md"
+  },
+  {
+    "question": "What does Truck-X guidance say about walking working surfaces?",
+    "workflow": "fault_triage",
+    "expected_source": "s-008_walking_working_surfaces.md"
+  },
+  {
+    "question": "What does Truck-X guidance say about air brake system compliance?",
+    "workflow": "quality_8d",
+    "expected_source": "r-003_air_brake_system_compliance.md"
+  },
+  {
+    "question": "What does Truck-X guidance say about diesel powertrain build verification?",
+    "workflow": "quality_8d",
+    "expected_source": "e-001_diesel_powertrain_build_verification.md"
+  },
+  {
+    "question": "What does Truck-X guidance say about driver visibility and mirrors?",
+    "workflow": "quality_8d",
+    "expected_source": "e-006_driver_visibility_and_mirrors.md"
+  }
+]
