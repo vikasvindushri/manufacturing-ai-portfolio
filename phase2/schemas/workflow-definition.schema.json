@@ -1,5 +1,66 @@
 {
   "$defs": {
+    "AICapability": {
+      "enum": [
+        "structured_review",
+        "grounded_synthesis",
+        "semantic_search"
+      ],
+      "title": "AICapability",
+      "type": "string"
+    },
+    "AIPolicy": {
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "default": false,
+          "title": "Enabled",
+          "type": "boolean"
+        },
+        "capability": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AICapability"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "prompt_template_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Prompt Template Id"
+        },
+        "allowed_classifications": {
+          "items": {
+            "$ref": "#/$defs/DataClassification"
+          },
+          "title": "Allowed Classifications",
+          "type": "array"
+        },
+        "fallback": {
+          "default": "local_result",
+          "title": "Fallback",
+          "type": "string"
+        },
+        "human_approval_required": {
+          "default": true,
+          "title": "Human Approval Required",
+          "type": "boolean"
+        }
+      },
+      "title": "AIPolicy",
+      "type": "object"
+    },
     "ApprovalPolicy": {
       "additionalProperties": false,
       "properties": {
@@ -19,6 +80,8 @@
           "items": {
             "type": "string"
           },
+          "maxItems": 20,
+          "minItems": 1,
           "title": "Allowed Roles",
           "type": "array"
         },
@@ -26,10 +89,25 @@
           "default": true,
           "title": "Rationale Required",
           "type": "boolean"
+        },
+        "creator_may_approve": {
+          "default": false,
+          "title": "Creator May Approve",
+          "type": "boolean"
         }
       },
       "title": "ApprovalPolicy",
       "type": "object"
+    },
+    "DataClassification": {
+      "enum": [
+        "synthetic",
+        "public",
+        "internal_non_sensitive",
+        "confidential_restricted"
+      ],
+      "title": "DataClassification",
+      "type": "string"
     },
     "FieldDefinition": {
       "additionalProperties": false,
@@ -73,6 +151,7 @@
           "items": {
             "type": "string"
           },
+          "maxItems": 100,
           "title": "Options",
           "type": "array"
         },
@@ -80,6 +159,17 @@
           "default": false,
           "title": "Sensitive",
           "type": "boolean"
+        },
+        "validation": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ValidationConstraint"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
         }
       },
       "required": [
@@ -116,6 +206,195 @@
       "title": "LifecycleStatus",
       "type": "string"
     },
+    "OutputField": {
+      "additionalProperties": false,
+      "properties": {
+        "field_id": {
+          "title": "Field Id",
+          "type": "string"
+        },
+        "label": {
+          "maxLength": 120,
+          "minLength": 1,
+          "title": "Label",
+          "type": "string"
+        },
+        "field_type": {
+          "$ref": "#/$defs/OutputFieldType"
+        },
+        "required": {
+          "default": false,
+          "title": "Required",
+          "type": "boolean"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "maxLength": 500,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "enum": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 100,
+          "title": "Enum",
+          "type": "array"
+        }
+      },
+      "required": [
+        "field_id",
+        "label",
+        "field_type"
+      ],
+      "title": "OutputField",
+      "type": "object"
+    },
+    "OutputFieldType": {
+      "enum": [
+        "string",
+        "integer",
+        "number",
+        "boolean",
+        "date",
+        "datetime",
+        "array",
+        "object"
+      ],
+      "title": "OutputFieldType",
+      "type": "string"
+    },
+    "OutputSchemaDefinition": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_id": {
+          "title": "Schema Id",
+          "type": "string"
+        },
+        "fields": {
+          "items": {
+            "$ref": "#/$defs/OutputField"
+          },
+          "maxItems": 200,
+          "minItems": 1,
+          "title": "Fields",
+          "type": "array"
+        }
+      },
+      "required": [
+        "schema_id",
+        "fields"
+      ],
+      "title": "OutputSchemaDefinition",
+      "type": "object"
+    },
+    "PromptTemplate": {
+      "additionalProperties": false,
+      "properties": {
+        "prompt_id": {
+          "title": "Prompt Id",
+          "type": "string"
+        },
+        "version": {
+          "pattern": "^\\d+\\.\\d+\\.\\d+$",
+          "title": "Version",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/$defs/LifecycleStatus",
+          "default": "draft"
+        },
+        "system_instruction": {
+          "maxLength": 8000,
+          "minLength": 10,
+          "title": "System Instruction",
+          "type": "string"
+        },
+        "task_template": {
+          "maxLength": 16000,
+          "minLength": 10,
+          "title": "Task Template",
+          "type": "string"
+        },
+        "variables": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 50,
+          "title": "Variables",
+          "type": "array"
+        },
+        "response_schema_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Response Schema Id"
+        }
+      },
+      "required": [
+        "prompt_id",
+        "version",
+        "system_instruction",
+        "task_template"
+      ],
+      "title": "PromptTemplate",
+      "type": "object"
+    },
+    "RoutingAction": {
+      "additionalProperties": false,
+      "properties": {
+        "action_id": {
+          "title": "Action Id",
+          "type": "string"
+        },
+        "when_rule_id": {
+          "title": "When Rule Id",
+          "type": "string"
+        },
+        "action_type": {
+          "$ref": "#/$defs/RoutingActionType"
+        },
+        "value": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "action_id",
+        "when_rule_id",
+        "action_type",
+        "value"
+      ],
+      "title": "RoutingAction",
+      "type": "object"
+    },
+    "RoutingActionType": {
+      "enum": [
+        "assign_role",
+        "set_severity",
+        "set_category",
+        "require_approval",
+        "escalate",
+        "require_follow_up"
+      ],
+      "title": "RoutingActionType",
+      "type": "string"
+    },
     "RuleDefinition": {
       "additionalProperties": false,
       "properties": {
@@ -138,6 +417,18 @@
           "minLength": 3,
           "title": "Message",
           "type": "string"
+        },
+        "enabled": {
+          "default": true,
+          "title": "Enabled",
+          "type": "boolean"
+        },
+        "priority": {
+          "default": 100,
+          "maximum": 10000,
+          "minimum": 0,
+          "title": "Priority",
+          "type": "integer"
         }
       },
       "required": [
@@ -161,6 +452,120 @@
       ],
       "title": "RuleOperator",
       "type": "string"
+    },
+    "SyntheticTestCase": {
+      "additionalProperties": false,
+      "properties": {
+        "test_case_id": {
+          "title": "Test Case Id",
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 120,
+          "minLength": 3,
+          "title": "Name",
+          "type": "string"
+        },
+        "classification": {
+          "$ref": "#/$defs/DataClassification",
+          "default": "synthetic"
+        },
+        "input": {
+          "additionalProperties": true,
+          "title": "Input",
+          "type": "object"
+        },
+        "expected_rule_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Expected Rule Ids",
+          "type": "array"
+        },
+        "expected_routing_action_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Expected Routing Action Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "test_case_id",
+        "name",
+        "input"
+      ],
+      "title": "SyntheticTestCase",
+      "type": "object"
+    },
+    "ValidationConstraint": {
+      "additionalProperties": false,
+      "properties": {
+        "minimum": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Minimum"
+        },
+        "maximum": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Maximum"
+        },
+        "min_length": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Min Length"
+        },
+        "max_length": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Length"
+        },
+        "pattern": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Pattern"
+        }
+      },
+      "title": "ValidationConstraint",
+      "type": "object"
     },
     "WorkflowMetadata": {
       "additionalProperties": false,
@@ -197,7 +602,7 @@
           "default": "draft"
         },
         "definition_version": {
-          "default": "1.0",
+          "default": "1.1",
           "title": "Definition Version",
           "type": "string"
         },
@@ -243,8 +648,50 @@
       "title": "Rules",
       "type": "array"
     },
+    "routing_actions": {
+      "items": {
+        "$ref": "#/$defs/RoutingAction"
+      },
+      "maxItems": 200,
+      "title": "Routing Actions",
+      "type": "array"
+    },
+    "prompts": {
+      "items": {
+        "$ref": "#/$defs/PromptTemplate"
+      },
+      "maxItems": 50,
+      "title": "Prompts",
+      "type": "array"
+    },
+    "output_schemas": {
+      "items": {
+        "$ref": "#/$defs/OutputSchemaDefinition"
+      },
+      "maxItems": 20,
+      "title": "Output Schemas",
+      "type": "array"
+    },
+    "ai_policy": {
+      "$ref": "#/$defs/AIPolicy"
+    },
+    "allowed_input_classifications": {
+      "items": {
+        "$ref": "#/$defs/DataClassification"
+      },
+      "title": "Allowed Input Classifications",
+      "type": "array"
+    },
     "approval": {
       "$ref": "#/$defs/ApprovalPolicy"
+    },
+    "test_cases": {
+      "items": {
+        "$ref": "#/$defs/SyntheticTestCase"
+      },
+      "maxItems": 50,
+      "title": "Test Cases",
+      "type": "array"
     },
     "extensions": {
       "additionalProperties": true,

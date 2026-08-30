@@ -3,25 +3,139 @@
     "workflow_id": "quality_8d_v1",
     "name": "Quality and 8D Investigation",
     "description": "Guided intake and governed review for a manufacturing quality investigation.",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "owner": "Manufacturing AI Studio",
     "status": "draft",
-    "definition_version": "1.0",
-    "tags": ["quality", "8d"]
+    "definition_version": "1.1",
+    "tags": [
+      "quality",
+      "8d"
+    ]
   },
   "fields": [
-    {"field_id": "incident_id", "label": "Incident ID", "field_type": "text", "required": true},
-    {"field_id": "defect", "label": "Defect statement", "field_type": "textarea", "required": true},
-    {"field_id": "severity", "label": "Severity", "field_type": "select", "required": true, "options": ["low", "medium", "high"]}
+    {
+      "field_id": "incident_id",
+      "label": "Incident ID",
+      "field_type": "text",
+      "required": true
+    },
+    {
+      "field_id": "defect",
+      "label": "Defect statement",
+      "field_type": "textarea",
+      "required": true,
+      "validation": {
+        "min_length": 10
+      }
+    },
+    {
+      "field_id": "severity",
+      "label": "Severity",
+      "field_type": "select",
+      "required": true,
+      "options": [
+        "low",
+        "medium",
+        "high"
+      ]
+    }
   ],
   "rules": [
-    {"rule_id": "high_severity", "field_id": "severity", "operator": "equals", "value": "high", "message": "High-severity cases require escalation."}
+    {
+      "rule_id": "high_severity",
+      "field_id": "severity",
+      "operator": "equals",
+      "value": "high",
+      "message": "High-severity cases require escalation.",
+      "priority": 10
+    }
+  ],
+  "routing_actions": [
+    {
+      "action_id": "escalate_high",
+      "when_rule_id": "high_severity",
+      "action_type": "escalate",
+      "value": "quality_manager"
+    }
+  ],
+  "prompts": [
+    {
+      "prompt_id": "quality_review_v1",
+      "version": "1.0.0",
+      "status": "draft",
+      "system_instruction": "You are a cautious manufacturing quality copilot. Separate facts from hypotheses.",
+      "task_template": "Review incident {{incident_id}} and identify evidence gaps for {{defect}}.",
+      "variables": [
+        "incident_id",
+        "defect"
+      ],
+      "response_schema_id": "quality_review_output"
+    }
+  ],
+  "output_schemas": [
+    {
+      "schema_id": "quality_review_output",
+      "fields": [
+        {
+          "field_id": "executive_summary",
+          "label": "Executive Summary",
+          "field_type": "string",
+          "required": true
+        },
+        {
+          "field_id": "approved",
+          "label": "Approved",
+          "field_type": "boolean",
+          "required": true
+        }
+      ]
+    }
+  ],
+  "ai_policy": {
+    "enabled": true,
+    "capability": "structured_review",
+    "prompt_template_id": "quality_review_v1",
+    "allowed_classifications": [
+      "synthetic",
+      "public",
+      "internal_non_sensitive"
+    ],
+    "fallback": "local_result",
+    "human_approval_required": true
+  },
+  "allowed_input_classifications": [
+    "synthetic",
+    "public",
+    "internal_non_sensitive",
+    "confidential_restricted"
   ],
   "approval": {
     "required": true,
     "minimum_approvals": 1,
-    "allowed_roles": ["quality_engineer", "manufacturing_engineer"],
-    "rationale_required": true
+    "allowed_roles": [
+      "quality_engineer",
+      "manufacturing_engineer"
+    ],
+    "rationale_required": true,
+    "creator_may_approve": false
   },
+  "test_cases": [
+    {
+      "test_case_id": "high_severity_case",
+      "name": "Synthetic high severity incident",
+      "classification": "synthetic",
+      "input": {
+        "incident_id": "SYN-001",
+        "defect": "Synthetic torque result below limit",
+        "severity": "high"
+      },
+      "expected_rule_ids": [
+        "high_severity"
+      ],
+      "expected_routing_action_ids": [
+        "escalate_high"
+      ]
+    }
+  ],
   "extensions": {}
 }

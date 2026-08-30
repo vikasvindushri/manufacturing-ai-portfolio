@@ -1,3 +1,3 @@
-"""Phase 2 guided workflow configuration package."""
-
-WORKFLOW_DEFINITION_VERSION = "1.0"
+"""Phase 2 guided workflow configuration."""
+WORKFLOW_DEFINITION_VERSION="1.1"
+SUPPORTED_DEFINITION_MAJOR=1
