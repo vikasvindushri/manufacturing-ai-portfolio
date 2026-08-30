@@ -1,0 +1,261 @@
+{
+  "$defs": {
+    "ApprovalPolicy": {
+      "additionalProperties": false,
+      "properties": {
+        "required": {
+          "default": true,
+          "title": "Required",
+          "type": "boolean"
+        },
+        "minimum_approvals": {
+          "default": 1,
+          "maximum": 10,
+          "minimum": 1,
+          "title": "Minimum Approvals",
+          "type": "integer"
+        },
+        "allowed_roles": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Allowed Roles",
+          "type": "array"
+        },
+        "rationale_required": {
+          "default": true,
+          "title": "Rationale Required",
+          "type": "boolean"
+        }
+      },
+      "title": "ApprovalPolicy",
+      "type": "object"
+    },
+    "FieldDefinition": {
+      "additionalProperties": false,
+      "properties": {
+        "field_id": {
+          "title": "Field Id",
+          "type": "string"
+        },
+        "label": {
+          "maxLength": 120,
+          "minLength": 1,
+          "title": "Label",
+          "type": "string"
+        },
+        "field_type": {
+          "$ref": "#/$defs/FieldType"
+        },
+        "required": {
+          "default": false,
+          "title": "Required",
+          "type": "boolean"
+        },
+        "help_text": {
+          "anyOf": [
+            {
+              "maxLength": 500,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Help Text"
+        },
+        "default": {
+          "default": null,
+          "title": "Default"
+        },
+        "options": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Options",
+          "type": "array"
+        },
+        "sensitive": {
+          "default": false,
+          "title": "Sensitive",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "field_id",
+        "label",
+        "field_type"
+      ],
+      "title": "FieldDefinition",
+      "type": "object"
+    },
+    "FieldType": {
+      "enum": [
+        "text",
+        "textarea",
+        "integer",
+        "number",
+        "boolean",
+        "date",
+        "datetime",
+        "select",
+        "multiselect"
+      ],
+      "title": "FieldType",
+      "type": "string"
+    },
+    "LifecycleStatus": {
+      "enum": [
+        "draft",
+        "in_review",
+        "approved",
+        "published",
+        "archived"
+      ],
+      "title": "LifecycleStatus",
+      "type": "string"
+    },
+    "RuleDefinition": {
+      "additionalProperties": false,
+      "properties": {
+        "rule_id": {
+          "title": "Rule Id",
+          "type": "string"
+        },
+        "field_id": {
+          "title": "Field Id",
+          "type": "string"
+        },
+        "operator": {
+          "$ref": "#/$defs/RuleOperator"
+        },
+        "value": {
+          "title": "Value"
+        },
+        "message": {
+          "maxLength": 300,
+          "minLength": 3,
+          "title": "Message",
+          "type": "string"
+        }
+      },
+      "required": [
+        "rule_id",
+        "field_id",
+        "operator",
+        "value",
+        "message"
+      ],
+      "title": "RuleDefinition",
+      "type": "object"
+    },
+    "RuleOperator": {
+      "enum": [
+        "equals",
+        "not_equals",
+        "contains",
+        "greater_than",
+        "less_than",
+        "in"
+      ],
+      "title": "RuleOperator",
+      "type": "string"
+    },
+    "WorkflowMetadata": {
+      "additionalProperties": false,
+      "properties": {
+        "workflow_id": {
+          "title": "Workflow Id",
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 120,
+          "minLength": 3,
+          "title": "Name",
+          "type": "string"
+        },
+        "description": {
+          "maxLength": 1000,
+          "minLength": 10,
+          "title": "Description",
+          "type": "string"
+        },
+        "version": {
+          "pattern": "^\\d+\\.\\d+\\.\\d+$",
+          "title": "Version",
+          "type": "string"
+        },
+        "owner": {
+          "maxLength": 120,
+          "minLength": 2,
+          "title": "Owner",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/$defs/LifecycleStatus",
+          "default": "draft"
+        },
+        "definition_version": {
+          "default": "1.0",
+          "title": "Definition Version",
+          "type": "string"
+        },
+        "tags": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 20,
+          "title": "Tags",
+          "type": "array"
+        }
+      },
+      "required": [
+        "workflow_id",
+        "name",
+        "description",
+        "version",
+        "owner"
+      ],
+      "title": "WorkflowMetadata",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "metadata": {
+      "$ref": "#/$defs/WorkflowMetadata"
+    },
+    "fields": {
+      "items": {
+        "$ref": "#/$defs/FieldDefinition"
+      },
+      "maxItems": 100,
+      "minItems": 1,
+      "title": "Fields",
+      "type": "array"
+    },
+    "rules": {
+      "items": {
+        "$ref": "#/$defs/RuleDefinition"
+      },
+      "maxItems": 200,
+      "title": "Rules",
+      "type": "array"
+    },
+    "approval": {
+      "$ref": "#/$defs/ApprovalPolicy"
+    },
+    "extensions": {
+      "additionalProperties": true,
+      "title": "Extensions",
+      "type": "object"
+    }
+  },
+  "required": [
+    "metadata",
+    "fields"
+  ],
+  "title": "WorkflowDefinition",
+  "type": "object"
+}

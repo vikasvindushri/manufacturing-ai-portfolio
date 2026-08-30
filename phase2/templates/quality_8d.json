@@ -1,0 +1,27 @@
+{
+  "metadata": {
+    "workflow_id": "quality_8d_v1",
+    "name": "Quality and 8D Investigation",
+    "description": "Guided intake and governed review for a manufacturing quality investigation.",
+    "version": "1.0.0",
+    "owner": "Manufacturing AI Studio",
+    "status": "draft",
+    "definition_version": "1.0",
+    "tags": ["quality", "8d"]
+  },
+  "fields": [
+    {"field_id": "incident_id", "label": "Incident ID", "field_type": "text", "required": true},
+    {"field_id": "defect", "label": "Defect statement", "field_type": "textarea", "required": true},
+    {"field_id": "severity", "label": "Severity", "field_type": "select", "required": true, "options": ["low", "medium", "high"]}
+  ],
+  "rules": [
+    {"rule_id": "high_severity", "field_id": "severity", "operator": "equals", "value": "high", "message": "High-severity cases require escalation."}
+  ],
+  "approval": {
+    "required": true,
+    "minimum_approvals": 1,
+    "allowed_roles": ["quality_engineer", "manufacturing_engineer"],
+    "rationale_required": true
+  },
+  "extensions": {}
+}
