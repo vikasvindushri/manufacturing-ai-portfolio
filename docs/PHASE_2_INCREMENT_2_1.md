@@ -1,5 +1,25 @@
 # Phase 2.1 Increment Record
 
-Delivered Workflow Definition Contract 1.1, input constraints, deterministic rules, routing actions, governed prompt references, output schemas, classification and AI policy, mandatory approval, synthetic preview cases, structured validation errors, and version compatibility checks.
+**Product:** Manufacturing AI Studio
+**Stable release:** v0.6
+**Development build:** v0.7.0-dev.1
+**Workflow Definition Contract:** 1.1
+**Branch:** `phase-2/workflow-definition-standard`
+**Status:** Complete on the feature branch
 
-The product remains v0.6 while this feature branch is under development. Product version v0.7.0 will be assigned after the complete Workflow Definition Standard feature is approved.
+## Delivered
+- Configurable fields and validation constraints
+- Deterministic rules and routing actions
+- Governed prompt references and output schemas
+- Classification and optional-AI policy
+- Mandatory local fallback and human approval
+- Synthetic preview cases
+- Structured errors and compatibility validation
+
+## Validation
+- 61 automated tests passing
+- Existing Phase 1 workflows retained
+- No secrets, runtime data, or credentials added
+
+## Known limitation
+The point-and-click Workflow Studio is not yet implemented. Increment 2.2 adds the five-template catalog and registry.

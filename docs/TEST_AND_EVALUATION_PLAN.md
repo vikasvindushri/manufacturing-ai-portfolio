@@ -19,3 +19,10 @@ Create a frozen SME-reviewed set and measure:
 
 ## Pilot design
 Run in shadow mode, compare with existing decisions, investigate disagreements, and establish go/no-go thresholds before workflow integration.
+
+
+## Phase 2.1 validation scope
+
+The v0.7.0-dev.1 development build adds tests for workflow models, field constraints, cross-reference validation, definition-version compatibility, nested-secret rejection, data-classification restrictions, mandatory local fallback, mandatory approval, and synthetic test-case enforcement.
+
+**Current automated validation target:** 61 tests passing with no failures.

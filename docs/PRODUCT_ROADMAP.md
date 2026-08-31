@@ -8,7 +8,7 @@ Evolve Manufacturing AI Studio from three demonstration applications into a gove
 **Exit decision:** Approved on August 28, 2026
 **Baseline:** v0.6
 **Tag:** `phase-1-complete`
-**Owner:** Vikas V Indushri 
+**Owner:** Vikas V Indushri
 **Exit decision:** PHASE_1_EXIT_DECISION.md
 
 **Goal:** Make the current suite reliable and easy to operate.
@@ -26,9 +26,24 @@ Evolve Manufacturing AI Studio from three demonstration applications into a gove
 
 **Evidence:** See [`PHASE_1_COMPLETION.md`](PHASE_1_COMPLETION.md).
 
-## Phase 2 — Guided workflow configuration
+## Phase 2 — Guided workflow configuration - IN PROGRESS
 
 **Goal:** Allow authorized users to configure common workflows using point-and-click controls.
+
+### Current development status
+- [x] Increment 2.0 - Workflow Definition Foundation
+- [x] Increment 2.1 - Complete Workflow Domain Model and Validation
+- [ ] Increment 2.2 - Five-template Catalog and Registry - next
+- [ ] Increment 2.3 - Point-and-click Form Builder
+- [ ] Increment 2.4 - Point-and-click Rule Builder
+- [ ] Increment 2.5 - Prompt Template Editor
+- [ ] Increment 2.6 - Output Schema Designer
+- [ ] Increment 2.7 - Preview and Synthetic Test Runner
+- [ ] Increment 2.8 - Configuration Import and Export
+- [ ] Increment 2.9 - Unified Workflow Studio
+
+**Development build:** v0.7.0-dev.1
+**Workflow Definition Contract:** 1.1
 
 - Form builder for incident, document-search, and fault-intake fields.
 - Rule builder for categories, severity, routing, and approval requirements.

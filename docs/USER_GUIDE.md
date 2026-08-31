@@ -40,3 +40,17 @@
 4. Ask a question in the chat and continue with follow-up questions.
 5. Inspect evidence status, [S1] citations, source metadata, and retrieval diagnostics.
 6. Gemini semantic search and synthesis are optional. Local hybrid retrieval remains available.
+
+
+## Phase 2 developer preview - v0.7.0-dev.1
+
+Increment 2.1 is a configuration-contract release. The existing Phase 1 application remains unchanged except for development-version and status indicators. The point-and-click Workflow Studio is not yet available.
+
+Validate the current workflow definition with:
+
+```bash
+python scripts/export_phase2_schema.py
+python -m pytest -q
+```
+
+The next increment adds the five-template catalog and registry, which will become the first visible Phase 2 experience.

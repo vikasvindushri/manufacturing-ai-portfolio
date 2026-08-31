@@ -20,9 +20,10 @@ from services.workflows import run_quality,run_knowledge,run_fault
 from shared.readiness import quality_readiness,fault_readiness
 from shared.presentation import source_banner,readiness_panel,analysis_sections,report_header
 from shared.health import system_health
+from shared.version import __version__, STABLE_RELEASE, PHASE_STATUS, WORKFLOW_DEFINITION_VERSION
 from knowledge_hub.service import load_chunks as hub_chunks, references_for_quality, references_for_fault, stats as hub_stats, catalog as hub_catalog
 ROOT=Path(__file__).resolve().parent
-APP_VERSION="0.6"
+APP_VERSION=__version__
 st.set_page_config(page_title="Manufacturing AI Studio",page_icon="🏭",layout="wide",initial_sidebar_state="expanded")
 try: cfg=load_config()
 except ValueError as exc: st.error(str(exc));st.stop()
@@ -284,7 +285,8 @@ def health_page():
 
 def about():
     page("Manufacturing AI Studio","A reliable, guided suite for quality, knowledge, and operational workflows.","HOME")
-    metric_row([("Products","3","Unified"),("Profile",cfg.profile,None),("Gemini","Enabled" if cfg.gemini_enabled and enabled() else "Local mode",None),("Session records",str(len(st.session_state.get('history',[]))),None)])
+    metric_row([("Products","3","Unified"),("Build",APP_VERSION,"Stable v"+STABLE_RELEASE),("Phase 2","Increment 2.1","Contract "+WORKFLOW_DEFINITION_VERSION),("Gemini","Enabled" if cfg.gemini_enabled and enabled() else "Local mode",None)])
+    st.caption(PHASE_STATUS)
     st.markdown("### Start here")
     st.write("Use the left navigation to select a workflow. Each product includes sample scenarios, validated forms, editable review, friendly recovery guidance, session history, and controlled export.")
     a,b,c=st.columns(3)

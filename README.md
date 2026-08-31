@@ -3,7 +3,8 @@
 > A governed, local-first product suite for quality investigations, evidence-backed manufacturing knowledge, and operational fault triage.
 
 [![CI](https://github.com/vikasvindushri/manufacturing-ai-portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/vikasvindushri/manufacturing-ai-portfolio/actions)
-![Version](https://img.shields.io/badge/version-v0.6-087F8C)
+![Stable](https://img.shields.io/badge/stable-v0.6-087F8C)
+![Development](https://img.shields.io/badge/development-v0.7.0--dev.1-F5A623)
 ![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB)
 ![Streamlit](https://img.shields.io/badge/UI-Streamlit-FF4B4B)
 ![Gemini](https://img.shields.io/badge/AI-Gemini%20optional-4285F4)
@@ -21,11 +22,16 @@ The suite contains three guided applications:
 
 ## Delivery Status
 
-- **Current release:** v0.6
+- **Stable release:** v0.6
+- **Development build:** v0.7.0-dev.1
+- **Workflow Definition Contract:** 1.1
 - **Phase 1 — Product Foundation:** Complete
 - **Phase 1 exit decision:** Approved
 - **Phase 1 baseline:** `phase-1-complete`
-- **Phase 2 — Guided Workflow Configuration:** Authorized to begin
+- **Phase 2 — Guided Workflow Configuration:** In development
+- **Phase 2 Increment 2.0 — Workflow Definition Foundation:** Complete
+- **Phase 2 Increment 2.1 — Domain Model and Validation:** Complete
+- **Next increment:** 2.2 Template Catalog and Registry
 - **Phase 3 — Data and Connector Studio:** Planned
 - **Phase 4 — Governance and Evaluation Center:** Planned
 - **Phase 5 — Visual Workflow Studio:** Planned
@@ -38,6 +44,14 @@ Version 0.6 adds the shared Truck-X Manufacturing Knowledge Hub with more than 5
 - [View the full release history](CHANGELOG.md)
 - [Review the product roadmap](docs/PRODUCT_ROADMAP.md)
 - [Review Phase 1 completion evidence](docs/PHASE_1_COMPLETION.md)
+
+## Phase 2 Development Status
+
+The active development build is **v0.7.0-dev.1** on `phase-2/workflow-definition-standard`. Increment 2.1 establishes Workflow Definition Contract 1.1 with configurable fields, validation constraints, deterministic rules, routing actions, governed prompt references, output schemas, data-classification and optional-AI policy, mandatory approval, synthetic preview cases, structured errors, and compatibility validation.
+
+The existing Phase 1 application remains operational. A point-and-click Workflow Studio is not yet visible in the application; the next increment introduces the five-template catalog and registry that will become the first visible Phase 2 experience.
+
+**Current validation target:** 61 automated tests passing.
 
 ## Product Maturity
 
