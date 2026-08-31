@@ -21,6 +21,7 @@ from shared.readiness import quality_readiness,fault_readiness
 from shared.presentation import source_banner,readiness_panel,analysis_sections,report_header
 from shared.health import system_health
 from shared.version import __version__, STABLE_RELEASE, PHASE_STATUS, WORKFLOW_DEFINITION_VERSION
+from phase2.ui import render_template_catalog
 from knowledge_hub.service import load_chunks as hub_chunks, references_for_quality, references_for_fault, stats as hub_stats, catalog as hub_catalog
 ROOT=Path(__file__).resolve().parent
 APP_VERSION=__version__
@@ -283,9 +284,14 @@ def health_page():
     st.markdown("### Diagnostics")
     st.code("python scripts/check_environment.py\npython scripts/test_gemini_connection.py\npython scripts/accessibility_check.py")
 
+def workflow_studio():
+    page("Workflow Studio","Browse, validate, and clone governed manufacturing workflow templates.","PHASE 2")
+    governance_note("Template cloning creates a preview draft only. A qualified reviewer must approve any future published workflow.")
+    render_template_catalog()
+
 def about():
     page("Manufacturing AI Studio","A reliable, guided suite for quality, knowledge, and operational workflows.","HOME")
-    metric_row([("Products","3","Unified"),("Build",APP_VERSION,"Stable v"+STABLE_RELEASE),("Phase 2","Increment 2.1","Contract "+WORKFLOW_DEFINITION_VERSION),("Gemini","Enabled" if cfg.gemini_enabled and enabled() else "Local mode",None)])
+    metric_row([("Products","3","Unified"),("Build",APP_VERSION,"Stable v"+STABLE_RELEASE),("Phase 2","Increment 2.2","Contract "+WORKFLOW_DEFINITION_VERSION),("Gemini","Enabled" if cfg.gemini_enabled and enabled() else "Local mode",None)])
     st.caption(PHASE_STATUS)
     st.markdown("### Start here")
     st.write("Use the left navigation to select a workflow. Each product includes sample scenarios, validated forms, editable review, friendly recovery guidance, session history, and controlled export.")
@@ -297,7 +303,7 @@ def about():
 with st.sidebar:
     st.title("Manufacturing AI Studio")
     st.caption(f"Version {APP_VERSION}")
-    nav=st.radio("Navigation",["Home","Quality & 8D","Knowledge Assistant","Fault Triage","Knowledge Hub","Session History","System Health"],label_visibility="collapsed")
+    nav=st.radio("Navigation",["Home","Workflow Studio","Quality & 8D","Knowledge Assistant","Fault Triage","Knowledge Hub","Session History","System Health"],label_visibility="collapsed")
     st.divider();st.caption(f"Profile: {cfg.profile}");st.caption(f"Gemini: {'enabled' if cfg.gemini_enabled and enabled() else 'local mode'}")
     if st.session_state.get("last_audit"):st.caption(f"Last event: {st.session_state['last_audit']['event_type']}")
-{"Home":about,"Quality & 8D":quality_form,"Knowledge Assistant":rag_app,"Fault Triage":fault_form,"Knowledge Hub":knowledge_hub_page,"Session History":history_page,"System Health":health_page}[nav]()
+{"Home":about,"Workflow Studio":workflow_studio,"Quality & 8D":quality_form,"Knowledge Assistant":rag_app,"Fault Triage":fault_form,"Knowledge Hub":knowledge_hub_page,"Session History":history_page,"System Health":health_page}[nav]()

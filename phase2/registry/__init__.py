@@ -1,3 +1,5 @@
+from .catalog import TemplateSummary,available_tags,get_template,list_templates,search_templates
 from .compatibility import CompatibilityResult,check_definition_version
+from .lifecycle import can_transition,clone_as_draft,transition
 from .loader import WorkflowLoadError,load_workflow,load_workflow_text
 from .validator import validate_json_text,validate_payload

@@ -15,19 +15,18 @@ def read_utf8(relative_path: str) -> str:
     return (ROOT / relative_path).read_text(encoding="utf-8")
 
 
-def test_version_file_and_shared_version_match():
+def test_versions_align():
     assert read_utf8("VERSION").strip() == __version__ == CURRENT_DEVELOPMENT_VERSION
-
-
-def test_release_and_contract_versions_are_explicit():
     assert STABLE_RELEASE == "0.6"
     assert WORKFLOW_DEFINITION_VERSION == "1.1"
     assert "Increment 2.2" in PHASE_STATUS
 
 
-def test_primary_documents_show_current_status():
-    readme = read_utf8("README.md")
-    roadmap = read_utf8("docs/PRODUCT_ROADMAP.md")
-    assert f"v{CURRENT_DEVELOPMENT_VERSION}" in readme
-    assert "Phase 2" in readme and "In development" in readme
-    assert "Increment 2.2" in roadmap and "IN PROGRESS" in roadmap
+def test_docs_align():
+    for relative_path in (
+        "README.md",
+        "CHANGELOG.md",
+        "docs/PRODUCT_ROADMAP.md",
+        "docs/PHASE_2_INCREMENT_2_2.md",
+    ):
+        assert f"v{CURRENT_DEVELOPMENT_VERSION}" in read_utf8(relative_path)

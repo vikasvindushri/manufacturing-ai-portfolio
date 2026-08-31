@@ -1,0 +1,135 @@
+{
+  "metadata": {
+    "workflow_id": "knowledge_search_v1",
+    "name": "Manufacturing Knowledge Search",
+    "description": "Evidence-backed manufacturing knowledge search with optional grounded synthesis and source review.",
+    "version": "1.0.0",
+    "owner": "Manufacturing AI Studio",
+    "status": "draft",
+    "definition_version": "1.1",
+    "tags": [
+      "knowledge",
+      "rag"
+    ]
+  },
+  "fields": [
+    {
+      "field_id": "question",
+      "label": "Manufacturing question",
+      "field_type": "textarea",
+      "required": true,
+      "validation": {
+        "min_length": 10
+      }
+    },
+    {
+      "field_id": "released_only",
+      "label": "Released documents only",
+      "field_type": "boolean",
+      "required": true
+    },
+    {
+      "field_id": "scope",
+      "label": "Search scope",
+      "field_type": "select",
+      "required": true,
+      "options": [
+        "quality",
+        "maintenance",
+        "process",
+        "all"
+      ]
+    }
+  ],
+  "rules": [],
+  "routing_actions": [],
+  "prompts": [
+    {
+      "prompt_id": "knowledge_synthesis_v1",
+      "version": "1.0.0",
+      "status": "draft",
+      "system_instruction": "Use only supplied manufacturing evidence and identify when evidence is insufficient.",
+      "task_template": "Answer {{question}} from the supplied evidence with source references.",
+      "variables": [
+        "question"
+      ],
+      "response_schema_id": "knowledge_search_output"
+    }
+  ],
+  "output_schemas": [
+    {
+      "schema_id": "knowledge_search_output",
+      "fields": [
+        {
+          "field_id": "answer",
+          "label": "Answer",
+          "field_type": "string",
+          "required": true
+        },
+        {
+          "field_id": "evidence_status",
+          "label": "Evidence status",
+          "field_type": "string",
+          "required": true,
+          "enum": [
+            "sufficient",
+            "partial",
+            "insufficient"
+          ]
+        },
+        {
+          "field_id": "references",
+          "label": "References",
+          "field_type": "array",
+          "required": true
+        }
+      ]
+    }
+  ],
+  "ai_policy": {
+    "enabled": true,
+    "capability": "grounded_synthesis",
+    "prompt_template_id": "knowledge_synthesis_v1",
+    "allowed_classifications": [
+      "synthetic",
+      "public",
+      "internal_non_sensitive"
+    ],
+    "fallback": "local_result",
+    "human_approval_required": true
+  },
+  "allowed_input_classifications": [
+    "synthetic",
+    "public",
+    "internal_non_sensitive",
+    "confidential_restricted"
+  ],
+  "approval": {
+    "required": true,
+    "minimum_approvals": 1,
+    "allowed_roles": [
+      "knowledge_reviewer"
+    ],
+    "rationale_required": true,
+    "creator_may_approve": false
+  },
+  "test_cases": [
+    {
+      "test_case_id": "knowledge_search_synthetic_case",
+      "name": "Synthetic preview case",
+      "classification": "synthetic",
+      "input": {
+        "question": "What synthetic checks follow a torque-control deviation?",
+        "released_only": true,
+        "scope": "quality"
+      },
+      "expected_rule_ids": [],
+      "expected_routing_action_ids": []
+    }
+  ],
+  "extensions": {
+    "catalog": {
+      "featured": true
+    }
+  }
+}

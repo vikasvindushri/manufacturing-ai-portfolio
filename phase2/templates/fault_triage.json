@@ -1,0 +1,139 @@
+{
+  "metadata": {
+    "workflow_id": "fault_triage_v1",
+    "name": "Equipment Fault Triage",
+    "description": "Guided first-response triage for a synthetic equipment or manufacturing process fault.",
+    "version": "1.0.0",
+    "owner": "Manufacturing AI Studio",
+    "status": "draft",
+    "definition_version": "1.1",
+    "tags": [
+      "maintenance",
+      "operations"
+    ]
+  },
+  "fields": [
+    {
+      "field_id": "fault_id",
+      "label": "Fault ID",
+      "field_type": "text",
+      "required": true
+    },
+    {
+      "field_id": "asset",
+      "label": "Asset",
+      "field_type": "text",
+      "required": true
+    },
+    {
+      "field_id": "symptom",
+      "label": "Observed symptom",
+      "field_type": "textarea",
+      "required": true,
+      "validation": {
+        "min_length": 10
+      }
+    },
+    {
+      "field_id": "safety_risk",
+      "label": "Safety risk present",
+      "field_type": "boolean",
+      "required": true
+    }
+  ],
+  "rules": [
+    {
+      "rule_id": "safety_escalation",
+      "field_id": "safety_risk",
+      "operator": "equals",
+      "value": true,
+      "message": "Potential safety risk requires immediate escalation.",
+      "priority": 1
+    }
+  ],
+  "routing_actions": [
+    {
+      "action_id": "escalate_safety",
+      "when_rule_id": "safety_escalation",
+      "action_type": "escalate",
+      "value": "safety_and_maintenance"
+    }
+  ],
+  "prompts": [],
+  "output_schemas": [
+    {
+      "schema_id": "fault_triage_output",
+      "fields": [
+        {
+          "field_id": "priority",
+          "label": "Priority",
+          "field_type": "string",
+          "required": true,
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ]
+        },
+        {
+          "field_id": "diagnostic_checks",
+          "label": "Diagnostic checks",
+          "field_type": "array",
+          "required": true
+        }
+      ]
+    }
+  ],
+  "ai_policy": {
+    "enabled": false,
+    "capability": null,
+    "prompt_template_id": null,
+    "allowed_classifications": [
+      "synthetic",
+      "public",
+      "internal_non_sensitive"
+    ],
+    "fallback": "local_result",
+    "human_approval_required": true
+  },
+  "allowed_input_classifications": [
+    "synthetic",
+    "public",
+    "internal_non_sensitive",
+    "confidential_restricted"
+  ],
+  "approval": {
+    "required": true,
+    "minimum_approvals": 1,
+    "allowed_roles": [
+      "maintenance_engineer",
+      "safety_reviewer"
+    ],
+    "rationale_required": true,
+    "creator_may_approve": false
+  },
+  "test_cases": [
+    {
+      "test_case_id": "fault_triage_synthetic_case",
+      "name": "Synthetic preview case",
+      "classification": "synthetic",
+      "input": {
+        "fault_id": "SYN-F-001",
+        "asset": "Synthetic Press 01",
+        "symptom": "Synthetic intermittent pressure drop during cycle",
+        "safety_risk": true
+      },
+      "expected_rule_ids": [
+        "safety_escalation"
+      ],
+      "expected_routing_action_ids": [
+        "escalate_safety"
+      ]
+    }
+  ],
+  "extensions": {
+    "catalog": {
+      "featured": true
+    }
+  }
+}

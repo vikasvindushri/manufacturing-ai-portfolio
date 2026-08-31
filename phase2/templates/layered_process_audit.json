@@ -1,0 +1,136 @@
+{
+  "metadata": {
+    "workflow_id": "layered_process_audit_v1",
+    "name": "Layered Process Audit",
+    "description": "Guided synthetic layered process audit with finding escalation and controlled closure.",
+    "version": "1.0.0",
+    "owner": "Manufacturing AI Studio",
+    "status": "draft",
+    "definition_version": "1.1",
+    "tags": [
+      "quality",
+      "audit"
+    ]
+  },
+  "fields": [
+    {
+      "field_id": "audit_id",
+      "label": "Audit ID",
+      "field_type": "text",
+      "required": true
+    },
+    {
+      "field_id": "process",
+      "label": "Process",
+      "field_type": "text",
+      "required": true
+    },
+    {
+      "field_id": "result",
+      "label": "Audit result",
+      "field_type": "select",
+      "required": true,
+      "options": [
+        "conforming",
+        "observation",
+        "nonconforming"
+      ]
+    },
+    {
+      "field_id": "finding",
+      "label": "Finding",
+      "field_type": "textarea",
+      "required": false
+    }
+  ],
+  "rules": [
+    {
+      "rule_id": "nonconforming_audit",
+      "field_id": "result",
+      "operator": "equals",
+      "value": "nonconforming",
+      "message": "Nonconforming audit requires corrective action.",
+      "priority": 10
+    }
+  ],
+  "routing_actions": [
+    {
+      "action_id": "require_corrective_action",
+      "when_rule_id": "nonconforming_audit",
+      "action_type": "require_follow_up",
+      "value": "corrective_action"
+    }
+  ],
+  "prompts": [],
+  "output_schemas": [
+    {
+      "schema_id": "layered_audit_output",
+      "fields": [
+        {
+          "field_id": "finding_summary",
+          "label": "Finding summary",
+          "field_type": "string",
+          "required": true
+        },
+        {
+          "field_id": "closure_status",
+          "label": "Closure status",
+          "field_type": "string",
+          "required": true
+        }
+      ]
+    }
+  ],
+  "ai_policy": {
+    "enabled": false,
+    "capability": null,
+    "prompt_template_id": null,
+    "allowed_classifications": [
+      "synthetic",
+      "public",
+      "internal_non_sensitive"
+    ],
+    "fallback": "local_result",
+    "human_approval_required": true
+  },
+  "allowed_input_classifications": [
+    "synthetic",
+    "public",
+    "internal_non_sensitive",
+    "confidential_restricted"
+  ],
+  "approval": {
+    "required": true,
+    "minimum_approvals": 1,
+    "allowed_roles": [
+      "audit_reviewer",
+      "quality_engineer"
+    ],
+    "rationale_required": true,
+    "creator_may_approve": false
+  },
+  "test_cases": [
+    {
+      "test_case_id": "layered_process_audit_synthetic_case",
+      "name": "Synthetic preview case",
+      "classification": "synthetic",
+      "input": {
+        "audit_id": "SYN-LPA-001",
+        "process": "Synthetic Assembly",
+        "result": "nonconforming",
+        "finding": "Synthetic check identified a missing verification mark"
+      },
+      "expected_rule_ids": [
+        "nonconforming_audit"
+      ],
+      "expected_routing_action_ids": [
+        "require_corrective_action"
+      ]
+    }
+  ],
+  "extensions": {
+    "catalog": {
+      "featured": true
+    }
+  }
+}

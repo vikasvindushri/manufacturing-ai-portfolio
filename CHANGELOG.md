@@ -1,31 +1,29 @@
 # Release History
 
-## v0.7.0-dev.1 - Phase 2.1 Workflow Definition Contract
+## v0.7.0-dev.2 - Phase 2.2 Template Catalog and Registry
 
 **Status:** Development prerelease
 **Stable baseline:** v0.6
 **Workflow Definition Contract:** 1.1
-**Branch:** `phase-2/workflow-definition-standard`
 
 ### Added
-- Configurable input fields and validation constraints
-- Deterministic rules and routing actions
-- Governed prompt references and output schemas
-- Data-classification and optional-AI policy with mandatory local fallback
-- Mandatory human approval and synthetic preview test cases
-- Structured validation errors and definition-version compatibility checks
+- Visible Workflow Studio Template Catalog
+- Five governed starter workflow templates
+- Search, domain filtering, validation metadata, governance summary, and JSON preview
+- Safe clone-as-draft preview and JSON download
+- Registry discovery, unique-ID checks, and controlled lifecycle transitions
 
-### Validation
-- 61 automated tests passing
-- Existing Phase 1 workflows remain available
-- No point-and-click Workflow Studio UI is included in this increment
+### Safety
+- Catalog actions do not write operational records or repository files
+- Templates require human approval and synthetic committed test cases
+- AI-enabled templates require local fallback and exclude confidential external-AI use
 
 ---
 
 ## v0.6 — Shared Truck-X Manufacturing Knowledge Hub
 
-**Release date:** August 27, 2026
-**Release status:** Current
+**Release date:** August 27, 2026  
+**Release status:** Current  
 **Release type:** Shared knowledge platform
 
 ### Added
@@ -43,8 +41,8 @@ The library summarizes public concepts and synthetic Truck-X assumptions. It is 
 
 ## v0.5 — Conversational Manufacturing Knowledge Assistant
 
-**Release date:** August 27, 2026
-**Release status:** Current
+**Release date:** August 27, 2026  
+**Release status:** Current  
 **Release type:** Knowledge retrieval and conversational experience
 
 ### Added
@@ -68,9 +66,9 @@ The repository README describes the current product. The [Product Roadmap](docs/
 
 ## v0.4 — Phase 1 Product Hardening
 
-**Release date:** August 23, 2026
-**Release status:** Current
-**Phase:** Phase 1 — Product Foundation
+**Release date:** August 23, 2026  
+**Release status:** Current  
+**Phase:** Phase 1 — Product Foundation  
 **Release type:** Product hardening, governance, and usability
 
 ### Summary
@@ -125,9 +123,9 @@ Version 0.4 completes the Phase 1 product-hardening scope. It improves report pr
 
 ## v0.3 — Resilient Local Execution
 
-**Release date:** August 23, 2026
-**Release status:** Superseded by v0.4
-**Phase:** Phase 1 — Product Foundation
+**Release date:** August 23, 2026  
+**Release status:** Superseded by v0.4  
+**Phase:** Phase 1 — Product Foundation  
 **Release type:** Reliability and fallback
 
 ### Summary
@@ -173,9 +171,9 @@ Version 0.3 established the local engines as the dependable processing baseline.
 
 ## v0.2 — Human-Readable Results
 
-**Release date:** August 23, 2026
-**Release status:** Superseded by v0.3
-**Phase:** Phase 1 — Product Foundation
+**Release date:** August 23, 2026  
+**Release status:** Superseded by v0.3  
+**Phase:** Phase 1 — Product Foundation  
 **Release type:** Usability and reporting
 
 ### Summary

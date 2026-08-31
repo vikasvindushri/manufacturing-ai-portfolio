@@ -1,0 +1,1 @@
+from .template_catalog import render_template_catalog

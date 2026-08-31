@@ -15,21 +15,6 @@ flowchart LR
 ## Production evolution
 Place APIs behind authentication, store approved records in a governed database, ingest only released documents, add observability, version prompts/models/rules, and integrate with QMS/MES/CMMS through approved interfaces.
 
+## Phase 2.2 catalog architecture
 
-## Phase 2 configuration architecture - Contract 1.1
-
-```mermaid
-flowchart LR
-  B[Future point-and-click builders] --> D[Workflow Definition 1.1]
-  D --> V[Strict model and compatibility validation]
-  V --> R[Rules and routing]
-  V --> P[Prompt and output references]
-  V --> G[Classification, AI and approval policy]
-  V --> T[Synthetic preview cases]
-  R --> X[Future configuration-driven runtime]
-  P --> X
-  G --> X
-  T --> X
-```
-
-Increment 2.1 establishes the configuration contract and validation boundary. It does not yet replace the Phase 1 runtime or add the Workflow Studio user interface.
+Workflow Studio calls the template catalog registry, which discovers JSON definitions, validates each through Workflow Definition Contract 1.1, presents summaries, and creates deep-copy draft previews through controlled lifecycle services. The current catalog is read-only with respect to operational systems and repository storage.
